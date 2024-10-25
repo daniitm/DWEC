@@ -16,7 +16,13 @@ window.onload = function() {
                         cell.style.backgroundColor = "white";
                 }
             };
-
         }
     }
+    clear.onclick = function() {
+        for (let i = 0; i < canvas.rows.length; i++) {
+            for (let j = 0; j < canvas.rows[i].cells.length; j++) {
+                canvas.rows[i].cells[j].style.backgroundColor = "white";
+            }
+        }
+    };
 };
