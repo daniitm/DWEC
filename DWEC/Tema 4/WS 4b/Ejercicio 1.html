@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+        #colorContainer {
+            display: grid;
+            grid-template-columns: repeat(3, 100px); 
+            grid-template-rows: repeat(2, 100px); 
+            gap: 10px; 
+            margin: 20px;
+        }
+        #message {
+            font-size: 1.2em;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Juego de adivinar el color</h1>
+    <p>Selecciona la dificultad:
+        <button onclick="setDifficulty(3)">Easy</button>
+        <b>/</b>
+        <button onclick="setDifficulty(6)">Hard</button>
+    </p>
+    <p>Adivina el color: <span id="colorDisplay"></span></p>
+    <div id="colorContainer"></div>
+    <p id="message"></p>
+    <p id="livesDisplay">Vidas: 3</p>
+    <script src="Ejercicio 1.js"></script>
+</body>
+</html>
