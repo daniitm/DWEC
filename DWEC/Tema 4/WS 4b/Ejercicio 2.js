@@ -1,63 +1,38 @@
-// script.js
-let displayValue = '';
-let firstOperand = null;
-let secondOperand = null;
-let currentOperation = null;
+const pantalla = document.getElementById("pantalla");
+let operacion = "";
 
-// Actualiza el valor mostrado en pantalla
-function updateDisplay() {
-    const display = document.getElementById('display');
-    display.textContent = displayValue || '0';
+function agregarNumero(numero) {
+    operacion += numero;
+    pantalla.value = operacion;
 }
 
-// Agrega un número al valor actual
-function appendNumber(number) {
-    if (number === '.' && displayValue.includes('.')) return; // Evita múltiples puntos decimales
-    displayValue += number;
-    updateDisplay();
-}
-
-// Configura la operación
-function setOperation(operation) {
-    if (currentOperation !== null) calculate();
-    firstOperand = parseFloat(displayValue);
-    currentOperation = operation;
-    displayValue = '';
-}
-
-// Realiza el cálculo
-function calculate() {
-    if (currentOperation === null || displayValue === '') return;
-    secondOperand = parseFloat(displayValue);
-    
-    switch (currentOperation) {
-        case '+':
-            displayValue = (firstOperand + secondOperand).toString();
-            break;
-        case '-':
-            displayValue = (firstOperand - secondOperand).toString();
-            break;
-        case '*':
-            displayValue = (firstOperand * secondOperand).toString();
-            break;
-        case '÷':
-            displayValue = secondOperand === 0 ? 'Error' : (firstOperand / secondOperand).toString();
-            break;
+function agregarPunto() {
+    const partes = operacion.split(/[\+\-\*\/]/);
+    const ultimoNumero = partes[partes.length - 1];
+  
+    if (!ultimoNumero.includes(".")) {
+      operacion += ".";
+      pantalla.value = operacion;
     }
-
-    currentOperation = null;
-    firstOperand = null;
-    updateDisplay();
 }
 
-// Borra el display y reinicia valores
-function clearDisplay() {
-    displayValue = '';
-    firstOperand = null;
-    secondOperand = null;
-    currentOperation = null;
-    updateDisplay();
+function agregarOperador(operador) {
+    if (operacion && !isNaN(operacion[operacion.length - 1])) {
+        operacion += operador;
+        pantalla.value = operacion;
+    }
 }
 
-// Inicia la pantalla con valor 0
-updateDisplay();
+function calcular() {
+    try {
+        operacion = eval(operacion).toString();
+        pantalla.value = operacion;
+    } catch (e) {
+        pantalla.value = "Error";
+    }
+}
+
+function limpiarPantalla() {
+    operacion = "";
+    pantalla.value = "";
+}

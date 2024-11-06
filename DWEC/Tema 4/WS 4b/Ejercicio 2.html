@@ -1,96 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+    }
 
-        .calculator {
-            width: 240px;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
+    .calculadora {
+        width: 200px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        box-sizing: border-box;
+    }
 
-        .display {
-            background-color: #222;
-            color: white;
-            font-size: 2em;
-            text-align: right;
-            padding: 20px;
-            height: 60px;
-        }
+    .pantalla {
+        width: 100%;
+        height: 40px;
+        font-size: 1.2em;
+        text-align: right;
+        padding: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
+    .botones {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+    }
 
-        button {
-            font-size: 1.5em;
-            padding: 20px;
-            background-color: #444;
-            color: white;
-            border: 1px solid #333;
-            cursor: pointer;
-            outline: none;
-        }
+    .boton {
+        width: 100%;
+        padding: 2px 0;
+        font-size: 1em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-        button:hover {
-            background-color: #555;
-        }
+    .boton-operador {
+        background-color: #c5c5c5;
+        color: #333;
+        height: 30px;
+        text-align: center;
+    }
 
-        button:active {
-            background-color: #666;
-        }
+    .boton-igual {
+        background-color: #4a90e2;
+        color: #fff;
+        grid-row: span 4;
+    }
 
-        button:nth-child(4n) {
-            background-color: #ff9500;
-        }
+    .boton-numero {
+        background-color: #e2e2e2;
+        color: #333;
+        height: 40px;
+        text-align: center;
+    }
 
-        button:nth-child(4n):hover {
-            background-color: #ffb74d;
-        }
+    .boton:hover {
+        opacity: 0.9;
+    }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div id="display" class="display">0</div>
-        <div class="buttons">
-            <button onclick="appendNumber('+')">7</button>
-            <button onclick="appendNumber('-')">8</button>
-            <button onclick="appendNumber('x')">9</button>
-            <button onclick="setOperation('÷')">÷</button>
-            
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button onclick="setOperation('*')">×</button>
-            
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button onclick="setOperation('-')">-</button>
-            
-            <button onclick="appendNumber('0')">0</button>
-            <button onclick="appendNumber('.')">.</button>
-            <button onclick="calculate()">=</button>
-            <button onclick="setOperation('+')">+</button>
-            
-            <button onclick="clearDisplay()">C</button>
-        </div>
+<div class="calculadora">
+    <input type="text" class="pantalla" id="pantalla" readonly>
+    <div class="botones">
+        <button class="boton boton-operador" onclick="agregarOperador('+')">+</button>
+        <button class="boton boton-operador" onclick="agregarOperador('-')">-</button>
+        <button class="boton boton-operador" onclick="agregarOperador('*')">×</button>
+        <button class="boton boton-operador" onclick="agregarOperador('/')">÷</button>
+
+        <button class="boton boton-numero" onclick="agregarNumero('7')">7</button>
+        <button class="boton boton-numero" onclick="agregarNumero('8')">8</button>
+        <button class="boton boton-numero" onclick="agregarNumero('9')">9</button>
+        <button class="boton boton-igual" onclick="calcular()">=</button>
+
+        <button class="boton boton-numero" onclick="agregarNumero('4')">4</button>
+        <button class="boton boton-numero" onclick="agregarNumero('5')">5</button>
+        <button class="boton boton-numero" onclick="agregarNumero('6')">6</button>
+
+        <button class="boton boton-numero" onclick="agregarNumero('1')">1</button>
+        <button class="boton boton-numero" onclick="agregarNumero('2')">2</button>
+        <button class="boton boton-numero" onclick="agregarNumero('3')">3</button>
+
+        <button class="boton boton-numero" onclick="agregarNumero('0')">0</button>
+        <button class="boton boton-numero" onclick="agregarPunto()">.</button>
+        <button class="boton boton-numero" onclick="limpiarPantalla()">C</button>
     </div>
-    <script src="Ejercicio 2.js"></script>
+</div>
+
+<script src="Ejercicio 2.js"></script>
+
 </body>
 </html>
