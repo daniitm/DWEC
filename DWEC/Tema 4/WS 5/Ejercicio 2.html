@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            color: #333333;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .input-group input.error {
+            border-color: #ff4d4d;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Botón de envío */
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Formulario de Registro</h2>
+        <form id="registroForm" novalidate>
+            <div class="input-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+                <div id="nombreError" class="error-message">Nombre inválido, solo letras y espacios permitidos.</div>
+            </div>
+
+            <div class="input-group">
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" required>
+                <div id="apellidosError" class="error-message">Apellidos inválidos, solo letras y espacios permitidos.</div>
+            </div>
+
+            <div class="input-group">
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" required>
+                <div id="dniError" class="error-message">DNI inválido, debe tener 8 números y una letra.</div>
+            </div>
+
+            <div class="input-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" required>
+                <div id="telefonoError" class="error-message">Teléfono inválido, debe tener 9 dígitos.</div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <div id="emailError" class="error-message">Email inválido, formato incorrecto.</div>
+            </div>
+
+            <div class="input-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" required>
+                <div id="usernameError" class="error-message">Usuario inválido, mínimo 8 caracteres, un número y un signo de puntuación.</div>
+            </div>
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <script src="Ejercicio 2.js"></script>
+
+</body>
+</html>

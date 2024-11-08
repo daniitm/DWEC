@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f26d6d;
+            font-family: Arial, sans-serif;
+            color: #ffe5e5;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #f26d6d;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .username-input {
+            border: none;
+            border-bottom: 2px solid #ffe5e5;
+            background: none;
+            color: #ffe5e5;
+            font-size: 1.2rem;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 1rem;
+        }
+
+        .requirements {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #ffe5e5;
+        }
+
+        .requirements li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .requirements li.valid {
+            color: #28a745; 
+        }
+
+        .requirements li::before {
+            content: "•";
+            color: currentColor;
+        }
+
+        button {
+            background-color: #ffb3b3;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:disabled {
+            background-color: #ff8c8c;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>username</h2>
+        <input type="text" id="username" class="username-input" placeholder="Nombre de usuario">
+
+        <ul class="requirements">
+            <li id="lowercase">1 lowercase character</li>
+            <li id="uppercase">1 uppercase character</li>
+            <li id="length">6 minimum characters</li>
+        </ul>
+
+        <button id="submitBtn" disabled>Submit</button>
+    </div>
+
+    <script src="Ejercicio 3.js"></script>
+
+</body>
+</html>
