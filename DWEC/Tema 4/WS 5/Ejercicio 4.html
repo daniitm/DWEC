@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px; /* Ajustamos el ancho para dar espacio a dos columnas */
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Espacio entre columnas */
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 45%; /* Se asegura que los campos no sean demasiado pequeños */
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input.invalid {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            position: absolute;
+            bottom: -18px;
+            left: 5px;
+        }
+
+        .checkbox-group {
+            flex-basis: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2ebf91;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #27ae60;
+        }
+
+        .form-group.full-width {
+            flex-basis: 100%;
+        }
+
+        .form-group.checkbox-group label {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Welcome to Crowdrise</h2>
+    <p>Let's get you all set up so you can verify your nonprofit and begin setting up your first campaign!</p>
+    <form id="registerForm">
+        <div class="form-container">
+            <div class="form-group">
+                <p>First Name</p>
+                <input type="text" id="firstName" placeholder="First Name">
+                <span class="error-message" id="errorFirstName"></span>
+            </div>
+            <div class="form-group">
+                <p>Last Name</p>
+                <input type="text" id="lastName" placeholder="Last Name">
+                <span class="error-message" id="errorLastName"></span>
+            </div>
+            <div class="form-group">
+                <p>Phone</p>
+                <input type="text" id="phone" placeholder="Phone">
+                <span class="error-message" id="errorPhone"></span>
+            </div>
+            <div class="form-group">
+                <p>Email</p>
+                <input type="email" id="email" placeholder="Email">
+                <span class="error-message" id="errorEmail"></span>
+            </div>
+            <div class="form-group">
+                <p>Password</p>
+                <input type="password" id="password" placeholder="Password">
+                <span class="error-message" id="errorPassword"></span>
+            </div>
+            <div class="form-group">
+                <p>Confirm Password</p>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                <span class="error-message" id="errorConfirmPassword"></span>
+            </div>
+            <!-- Checkbox de términos y suscripción -->
+            <div class="form-group checkbox-group full-width">
+                <input type="checkbox" id="receiveEmails">
+                <label for="receiveEmails">Yes, I want to receive Crowdrise's emails</label>
+            </div>
+            <div class="form-group checkbox-group full-width">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms, Privacy Policy and Fees</a></label>
+                <span class="error-message" id="errorTerms"></span>
+            </div>
+            <div class="form-group full-width">
+                <button type="button" onclick="validateForm()">Sign Up</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="Ejercicio 4.js"></script>
+
+</body>
+</html>

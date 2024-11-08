@@ -36,10 +36,4 @@ document.getElementById('registroForm').addEventListener('submit', function(even
             formularioValido = false;
         }
     });
-
-    if (formularioValido) {
-        alert("Registro exitoso.");
-    } else {
-        alert("Por favor, corrige los errores en el formulario.");
-    }
 });
