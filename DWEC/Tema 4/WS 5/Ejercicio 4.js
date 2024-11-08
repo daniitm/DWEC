@@ -12,7 +12,6 @@ function validateForm() {
 
     let isValid = true;
 
-    // Validaciones
     if (!firstName.value) firstName.classList.add('invalid');
     else firstName.classList.remove('invalid');
 
