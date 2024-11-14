@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body id="pagina">
+    <h1>Bienvenido a nuestro sitio web</h1>
+    <div id="mensaje"></div>
+
+    <h2>Personaliza tu experiencia:</h2>
+    <form id="configForm">
+        <label for="colorFondo">Color de fondo:</label>
+        <input type="color" id="colorFondo"><br><br>
+
+        <label for="colorTexto">Color del texto:</label>
+        <input type="color" id="colorTexto"><br><br>
+
+        <label for="tamanoTexto">Tamaño de la letra (px):</label>
+        <input type="number" id="tamanoTexto" min="10" max="50" value="16"><br><br>
+
+        <button type="button" id="guardarBtn">Guardar configuración</button>
+        <button type="button" id="logoutBtn" style="display:none;">Cerrar Sesión</button>
+    </form>
+
+    <script src="Ejercicio 3.js"></script>
+
+</body>
+</html>
