@@ -76,3 +76,4 @@ function startGame() {
 }
 
 startGame();
+};
