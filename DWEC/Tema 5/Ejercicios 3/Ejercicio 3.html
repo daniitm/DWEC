@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #84cbfe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff;
+    }
+
+    .timer {
+    font-size: 18px;
+    margin-bottom: 20px;
+    }
+
+    .cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+    .row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    }
+
+    .card {
+    width: 80px;
+    height: 120px;
+    background-color: #3c82cb;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+    border-radius: 10px;
+    position: relative;
+    }
+
+    .card.flipped {
+    background-color: #fff;
+    color:#84cbfe;
+    }
+
+    .card.matched {
+    background-color: #fff;
+    cursor: not-allowed;
+    }
+
+    .card:after {
+    content: "?";
+    position: absolute;
+    font-size: 36px;
+    }
+
+    .card.flipped:after {
+    content: attr(data-card);
+    }
+  </style>
+</head>
+<body>
+  <h1>JAVASCRIPT PAIRS GAME</h1>
+  <h2>CLICK ANY CARD TO BEGIN</h2>
+  <div class="timer">
+    <h2><span id="time">00:00</span></p>
+  </div>
+  <div class="cards-container">
+    <div class="row">
+      <div class="card" data-card="1"></div>
+      <div class="card" data-card="2"></div>
+      <div class="card" data-card="3"></div>
+      <div class="card" data-card="4"></div>
+      <div class="card" data-card="5"></div>
+    </div>
+    <div class="row">
+      <div class="card" data-card="1"></div>
+      <div class="card" data-card="2"></div>
+      <div class="card" data-card="3"></div>
+      <div class="card" data-card="4"></div>
+      <div class="card" data-card="5"></div>
+    </div>
+  </div>
+  <script src="Ejercicio 3.js"></script>
+</body>
+</html>
