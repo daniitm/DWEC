@@ -42,17 +42,15 @@ function handleLetterClick(letter) {
     }
 }
 
-// Función para reiniciar el juego
 function resetGame() {
-    word = wordList[Math.floor(Math.random() * wordList.length)]; // Nueva palabra aleatoria
-    displayedWord = Array(word.length).fill('_'); // Restablecer la palabra oculta
-    lives = 10; // Restablecer las vidas
+    word = wordList[Math.floor(Math.random() * wordList.length)]; 
+    displayedWord = Array(word.length).fill('_'); 
+    lives = 10; 
     updateWordDisplay();
     updateLives();
     enableAllButtons();
 }
 
-// Función para habilitar todos los botones de las letras
 function enableAllButtons() {
     const buttons = document.querySelectorAll('.letters button');
     buttons.forEach(button => {
@@ -60,7 +58,6 @@ function enableAllButtons() {
     });
 }
 
-// Crear los botones de las letras
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 alphabet.forEach(letter => {
     const button = document.createElement('button');
@@ -70,6 +67,5 @@ alphabet.forEach(letter => {
     lettersContainer.appendChild(button);
 });
 
-// Inicializar la visualización del juego
 updateWordDisplay();
 updateLives();
