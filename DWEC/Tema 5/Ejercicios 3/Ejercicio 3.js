@@ -9,6 +9,7 @@ let lockBoard = false;
 function shuffle() {
   const values = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5'];
   values.sort(() => Math.random() - 0.5);
+  
   cards.forEach((card, index) => {
     card.setAttribute('data-card', values[index]);
   });
@@ -43,6 +44,7 @@ function checkMatch() {
       card1.classList.remove('flipped');
       card2.classList.remove('flipped');
     }, 1000);  
+  }
 
   flippedCards = [];
 
@@ -57,11 +59,13 @@ cards.forEach(card => {
     if (lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) {
       return;
     }
+
     card.classList.add('flipped');
     flippedCards.push(card);
 
     if (flippedCards.length === 2) {
       lockBoard = true;  
+      checkMatch();
       
       setTimeout(() => {
         lockBoard = false;
@@ -76,4 +80,3 @@ function startGame() {
 }
 
 startGame();
-};
