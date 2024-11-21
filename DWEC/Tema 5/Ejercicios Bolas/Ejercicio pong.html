@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong en JavaScript sin Canvas</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+
+        .game-area {
+            width: 800px;
+            height: 400px;
+            position: relative;
+            background-color: #000;
+            border: 2px solid #fff;
+        }
+
+        .paddle {
+            position: absolute;
+            width: 10px;
+            height: 100px;
+            background-color: white;
+        }
+
+        .ball {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .scoreboard {
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-area" id="gameArea">
+        <div class="paddle" id="player1" style="left: 0;"></div>
+        <div class="paddle" id="player2" style="right: 0;"></div>
+        <div class="ball" id="ball"></div>
+        <div class="scoreboard" id="scoreboard">Pong</div>
+    </div>
+    <script src="Ejercicio pong.js"></script>
+</body>
+</html>

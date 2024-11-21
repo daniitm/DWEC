@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .chart-container {
+            display: inline-block;
+            width: 45%;
+            margin-bottom: 20px;
+        }
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-evenly;
+            height: 300px;
+            width: 100%;
+            border-left: 2px solid black;
+            border-bottom: 2px solid black;
+            position: relative;
+        }
+
+        .bar {
+            margin: 0 5px;
+            width: 50px;
+            background-color: #007BFF;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            position: relative; /* Necesario para posicionar el número encima de la barra */
+        }
+
+        .bar-number {
+            position: absolute;
+            bottom: 100%; /* Coloca el número justo encima de la barra */
+            left: 50%;
+            transform: translateX(-50%); /* Centra el número horizontalmente */
+            font-size: 14px;
+            color: black;
+            font-weight: bold;
+        }
+        .pie-chart {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 300px;
+            border-radius: 50%;
+            clip-path: circle();
+        }
+        #pieChart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(); 
+        }
+        #description {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #333;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #regions_div {
+            width: 100%;
+            height: 500px;
+        }
+        #geoChart {
+            margin-bottom: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h2>Representación en el Congreso de los Diputados</h2>
+    <div class="container">
+        <!-- Gráfico de barras -->
+        <div class="chart-container">
+            <h3>Gráfico de barras</h3>
+            <div class="bar-chart" id="barChart"></div>
+        </div>
+
+        <!-- Gráfico de sectores -->
+        <div class="chart-container">
+            <h3>Gráfico de sectores</h3>
+            <div id="pieChart" style="width: 200px; height: 200px; border-radius: 50%;"></div>
+        </div>
+    </div>
+
+    <h2>Mapa Geográfico de Visitantes</h2>
+    <!-- Div para el gráfico geográfico -->
+    <div id="regions_div"></div>
+
+    <div id="geoChart">
+        <h3>Datos de los países más visitados:</h3>
+        <div id="geoChartList"></div>
+    </div>
+
+    <script src="Ejercicio 1.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
