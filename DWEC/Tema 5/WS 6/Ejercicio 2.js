@@ -1,44 +1,66 @@
-//Datos del Congreso
+// Datos iniciales del Congreso
 const partidos = ['PP', 'PSOE', 'Vox', 'Sumar', 'ERC', 'Junts', 'EH Bildu', 'EAJ-PNV', 'BNG', 'CC', 'UPN'];
-const escaños = [137, 121, 33, 31, 7, 7, 6, 5, 1, 1, 1];
-
-//Colores para los grafico
 const colores = ['#2872c1', '#c12828', '#52bb44', '#d13f74', '#d6d631', '#32b9d1', '#32b9d1', '#3bae54', '#79e1d7', '#d6d631', '#2872c1'];
 
-//Calculando el total de escaños
-const totalEscaños = escaños.reduce((a, b) => a + b, 0);
-
-//Grafica de barras
+// Elementos para las gráficas
 const barChart = document.getElementById('barChart');
-escaños.forEach((escaño, i) => {
-    const bar = document.createElement('div');
-    bar.className = 'bar';
-    bar.style.height = `${escaño * 2}px`; 
-    bar.style.backgroundColor = colores[i];
-    bar.title = `${partidos[i]}: ${escaño} escaños`;
-
-    const number = document.createElement('div');
-    number.className = 'bar-number';
-    number.textContent = escaño;
-
-    barChart.appendChild(bar);
-    bar.appendChild(number); 
-});
-
-//Grafica de sectores
 const pieChart = document.getElementById('pieChart');
-let conicGradient = '';
-let startAngle = 0;
 
-//Calculo de escaños
-escaños.forEach((escaño, i) => {
-    const angle = (escaño / totalEscaños) * 360;
-    conicGradient += `${colores[i]} ${startAngle}deg ${startAngle + angle}deg, `;
-    startAngle += angle;
-});
+// Función para generar datos aleatorios para los escaños
+function generarEscañosAleatorios() {
+    return Array.from({ length: partidos.length }, () => Math.floor(Math.random() * 150) + 1); // Genera entre 1 y 15 escaños aleatorios
+}
 
-pieChart.style.background = `conic-gradient(${conicGradient.slice(0, -2)})`; 
+// Función para dibujar la gráfica de barras
+function dibujarGraficaBarras(escaños) {
+    // Limpiar la gráfica de barras
+    barChart.innerHTML = '';
 
+    // Dibujar las barras
+    escaños.forEach((escaño, i) => {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.height = `${escaño * 2}px`; 
+        bar.style.backgroundColor = colores[i];
+        bar.title = `${partidos[i]}: ${escaño} escaños`;
+
+        const number = document.createElement('div');
+        number.className = 'bar-number';
+        number.textContent = escaño;
+
+        barChart.appendChild(bar);
+        bar.appendChild(number);
+    });
+}
+
+// Función para dibujar la gráfica de sectores (pie chart)
+function dibujarGraficaSectores(escaños) {
+    let conicGradient = '';
+    let startAngle = 0;
+
+    // Calcular el ángulo para cada sector
+    escaños.forEach((escaño, i) => {
+        const angle = (escaño / escaños.reduce((a, b) => a + b, 0)) * 360;
+        conicGradient += `${colores[i]} ${startAngle}deg ${startAngle + angle}deg, `;
+        startAngle += angle;
+    });
+
+    // Actualizar el fondo de la gráfica circular
+    pieChart.style.background = `conic-gradient(${conicGradient.slice(0, -2)})`;
+}
+
+// Función para actualizar los datos
+function actualizarDatos() {
+    const nuevosEscaños = generarEscañosAleatorios();
+    dibujarGraficaBarras(nuevosEscaños);
+    dibujarGraficaSectores(nuevosEscaños);
+}
+
+// Ejecutar la actualización cada 10 segundos
+setInterval(actualizarDatos, 10000);
+
+// Inicializar con datos aleatorios al cargar la página
+actualizarDatos();
 
 
 //Datos geograficos de los paises

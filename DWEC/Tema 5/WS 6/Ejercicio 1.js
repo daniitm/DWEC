@@ -42,8 +42,8 @@ pieChart.style.background = `conic-gradient(${conicGradient.slice(0, -2)})`;
 
 
 //Datos geograficos de los paises
-const paises = ['ES', 'FR', 'US', 'CN', 'IT'];  
-const visitantes = [89.4, 83.7, 79.3, 65.7, 64.5];
+const paises = ['ES', 'FR', 'US', 'IT', 'CN'];  
+const visitantes = [89.4, 83.7, 79.3, 70.5, 64.5];
 
 //Mostrar los datos en una lista 
 const geoChartList = document.getElementById('geoChartList');
