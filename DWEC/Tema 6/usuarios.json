@@ -1,0 +1,16 @@
+{
+    "usuarios":[
+        {
+            "nombre": "dani",
+            "apellidos": "triviño",
+            "edad": 19,
+            "telefonos": ["654298317", "621597843"]
+        },
+        {
+            "nombre": "pablo",
+            "apellidos": "marín",
+            "edad": 18,
+            "telefonos": ["657843219", "618439572"]
+        }
+    ]
+}
