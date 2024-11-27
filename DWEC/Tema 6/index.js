@@ -1,7 +1,12 @@
 //AJAX:
 
+var pelicaBusqueda = "";
+var paginaBuscar = 2;
+
 window.onload = ()=>{
-    document.getElementById("btn").addEventListener("click", peticionAJAX);
+    document.getElementById("btn").addEventListener("click", peticionAJAXModerna);
+    document.getElementById("btn1").addEventListener("click", cargarPaginas);
+
 }
 
 function peticionAJAX () {
@@ -18,25 +23,48 @@ function peticionAJAX () {
     xhttp.send();
 }
 
-/*
-window.onload = () => {
-    document.getElementById("btn").addEventListener("click", peticionAJAX);
-};
+function peticionAJAXModerna() {
+    let pelicaBusqueda = document.getElementById("cajaTexto").value;
+    fetch("http://www.omdbapi.com/?apikey=d535906&s="+pelicaBusqueda, {method: "GET"})
+    .then((res) => res.json())
+    .then((datosRecibidos) => {
+        document.getElementById("numeroResultados").innerHTML = "Se han encontrado " + datosRecibidos.totalResults;
 
-function peticionAJAX() {
-    var xhttp = new XMLHttpRequest();
+        let milista = document.getElementById("lista");
+        milista.innerHTML = "";
+        console.log(datosRecibidos);
+        for (pelicula of datosRecibidos.Search) {
+            let li = document.createElement("li");
+            li.innerHTML = pelicula.Title +" - "+ pelicula.Year; 
+            milista.appendChild(li);
 
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("usuarios").innerHTML = this.responseText;
-            let usuarios = JSON.parse(this.responseText);
-            for (usuarios of respuesta.usuarios) {
-            document.getElementById("usuarios").innerHTML = respuesta.usuarios[0].titulo;
-            }
+            let img = document.createElement("img");
+            img.src = pelicula.Poster;
+            milista.appendChild(img);
         }
-    };
-
-    xhttp.open("GET", "usuarios.json", true); 
-    xhttp.send();
+        //document.getElementById("titulo").innerHTML = "He recibido " + datosRecibidos.usuarios.length + " usuarios";
+        console.log(datosRecibidos)
+    })
+    .catch((err) => console.error ("error: ", err));
 }
-*/
+
+function cargarPaginas () {
+    fetch("http://www.omdbapi.com/?apikey=d535906&s="+pelicaBusqueda+"&page="+paginaBuscar, {method: "GET"})
+    .then((res) => res.json())
+    .then((datosRecibidos) => {
+        paginaBuscar++
+        let milista = document.getElementById("lista");
+        console.log(datosRecibidos);
+        for (pelicula of datosRecibidos.Search) {
+            let li = document.createElement("li");
+            li.innerHTML = pelicula.Title +" - "+ pelicula.Year; 
+            milista.appendChild(li);
+
+            let img = document.createElement("img");
+            img.src = pelicula.Poster;
+            milista.appendChild(img);
+        }
+        console.log(datosRecibidos)
+    })
+    .catch((err) => console.error ("error: ", err));
+}
