@@ -4,8 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Películas</title>
-    <link rel="stylesheet" href="Buscador Peliculas.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Agregar estilos básicos para la visualización */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        #peliculas-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .pelicula {
+            width: 200px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .pelicula:hover {
+            transform: scale(1.05);
+        }
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        #detalles {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;  
+            margin-right: 0%;  
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 40px;
+            overflow-y: auto;
+            z-index: 9999;
+        }
+        #detalles h2 {
+            margin-top: 0;
+        }
+        #detalles img {
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        #cerrarDetalles {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #cerrarDetalles:hover {
+            background-color: darkred;
+        }
+        #numeroResultados {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,8 +88,8 @@
       </div>
       <ul class="nav-links">
         <li><a href="#home">Inicio</a></li>
-        <li><a href="#about">Sobre Mí</a></li>
-        <li><a href="#services">Servicios</a></li>
+        <li><a href="#peliculas">Peliculas</a></li>
+        <li><a href="#series">Series</a></li>
         <li><a href="#skills">Habilidades</a></li>
         <li><a href="#portfolio">Portafolio</a></li>
         <li><a href="#contact">Contacto</a></li>
@@ -45,22 +113,20 @@
       <p>¡Disfruta de las películas!</p>
     </div>
 
-    <div id="peliculas-container" class="peliculas-grid">
-        <div class="results">
-            <p id="numeroResultados"></p>
-            <div id="peliculas-container" class="peliculas-container"></div>
-            <button id="btn1" style="display: none;">Cargar más</button>
-        </div>
+    <div class="results">
+        <p id="numeroResultados">Se han encontrado: 0</p>
     </div>
-    <button class="btn1" id="btn1" onclick="cargarPaginas()">Cargar más</button>
-  </section>
-    
-  <section id="detalles" class="detalles">
-    <button id="cerrarDetalles" class="cerrar-btn"></button>
-  </section>
-</div>
 
-  <!-- Footer -->
+    <div id="peliculas-container" class="peliculas-grid">
+        <!-- Aquí se cargarán las películas dinámicamente -->
+    </div>
+  </section>
+
+  <div id="detalles">
+    <button id="cerrarDetalles">Cerrar</button>
+    <!-- Aquí se cargarán los detalles dinámicamente -->
+  </div>
+
   <footer>
     <div class="social-links">
       <a href="https://github.com/"><i class="fa-brands fa-github"></i></a>
