@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #fff;
+            background-color: #f4f4f4;
         }
 
         .toolbar {
@@ -21,36 +21,35 @@
         }
 
         .toolbar button {
-            background-color: #555;
+            background-color: #007bff;
             color: #fff;
             border: none;
             padding: 10px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
         #notasContainer {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            padding: 10px;
-        }
-
-        #notasContainer.list {
-            display: block;
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 50px);
+            overflow: hidden;
         }
 
         .nota {
             background-color: #fff;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
+            position: absolute;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: grab;
         }
 
         .nota h3 {
             margin: 0 0 5px;
-            font-size: 18px;
+            font-size: 16px;
+            color: #333;
         }
 
         .nota p {
@@ -59,36 +58,30 @@
             color: #555;
         }
 
-        .nota .nota-tiempo {
-            display: block;
-            margin-top: 10px;
-            font-size: 12px;
-            color: #999;
-        }
-
-        .nota button.eliminar {
+        .nota .eliminar {
             position: absolute;
             top: 5px;
             right: 5px;
             background-color: red;
             color: #fff;
             border: none;
-            border-radius: 3px;
+            border-radius: 50%;
             cursor: pointer;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 16px;
             font-size: 12px;
-        }
-
-        .nota[draggable="true"] {
-            cursor: grab;
-        }
-
-        .nota[draggable="true"]:active {
-            cursor: grabbing;
         }
     </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div class="toolbar">
+            <button id="nuevaNota">Nueva Nota</button>
+        </div>
+        <div id="notasContainer"></div>
+    </div>
     <script src="Ejercicio Notas.js"></script>
 </body>
 </html>
