@@ -90,7 +90,7 @@ function cargarPeliculas() {
 //Funcion para scroll
 function verificarScroll() {
     //Velocidad
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 800) {
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1000) {
         cargarPeliculas(); 
     }
 }
@@ -141,7 +141,7 @@ function detalles(imdbID) {
         detallesDiv.appendChild(poster);
 
         poster.addEventListener("error", () => {
-            poster.src = "chill.png"; //Imagen por defecto si falla la carga
+            poster.src = "chill.png"; //Poster por defecto si falla la carga
         });
 
         //Mostrar la ventana flotante

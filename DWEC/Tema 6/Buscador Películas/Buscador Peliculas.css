@@ -1,29 +1,30 @@
 * {
-    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-  
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem; /*Mejor precision*/
+
+html, body {
+    height: 100%; /* Asegura que el html y body ocupen toda la altura de la pantalla */
+    margin: 0; /* Elimina cualquier margen predeterminado */
+    padding: 0; /* Elimina cualquier relleno predeterminado */
+    display: flex; /* Hacemos que el body sea un contenedor flexible */
+    flex-direction: column; /* Colocamos los elementos en una columna */
 }
 
-/* Estilos generales para el cuerpo */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
     background-color: #121212;
     color: #E0E0E0;
     overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
+    flex: 1; /* Esto hace que el contenido principal se expanda para llenar el espacio disponible */
 }
 
 /* Estilos para el header */
 header {
     position: fixed;
+    padding: 10px 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -104,7 +105,7 @@ header {
 /* Estilos para la sección de películas */
 section.peliculas {
     margin-top: 80px;
-    padding: 20px;
+    padding: 50px;
     background-color: #121212;
     color: #E0E0E0;
     transition: background-color 0.3s, color 0.3s;
@@ -147,7 +148,7 @@ section.peliculas {
 
 .search-container button {
     padding: 10px 20px;
-    background-color: #BB86FC;
+    background-color: #E0E0E0;
     color: #1F1F1F;
     border: none;
     border-radius: 5px;
@@ -156,7 +157,7 @@ section.peliculas {
 }
 
 .search-container button:hover {
-    background-color: #CF6679;
+    background-color: #BB86FC;
 }
 
 /* Resultados */
@@ -245,7 +246,7 @@ section.peliculas {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: #CF6679;
+    background-color: #E0E0E0;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -263,11 +264,12 @@ footer {
     background-color: #1F1F1F;
     color: #E0E0E0;
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    margin-top: auto; /* Esto asegura que el footer siempre esté al final */
 }
 
 footer .social-links a {
