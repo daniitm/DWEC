@@ -4,79 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Películas</title>
-    <style>
-        /* Agregar estilos básicos para la visualización */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .search-container {
-            margin-bottom: 20px;
-        }
-        #peliculas-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .pelicula {
-            width: 200px;
-            background-color: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .pelicula:hover {
-            transform: scale(1.05);
-        }
-        img {
-            width: 100%;
-            border-radius: 5px;
-        }
-        #detalles {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;  
-            margin-right: 0%;  
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 40px;
-            overflow-y: auto;
-            z-index: 9999;
-        }
-        #detalles h2 {
-            margin-top: 0;
-        }
-        #detalles img {
-            max-width: 300px;
-            margin-top: 20px;
-        }
-        #cerrarDetalles {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        #cerrarDetalles:hover {
-            background-color: darkred;
-        }
-        #numeroResultados {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="Buscador Peliculas.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
   <!-- Menu de Navegación -->
   <header>
     <nav class="navbar">
@@ -90,8 +21,7 @@
         <li><a href="#home">Inicio</a></li>
         <li><a href="#peliculas">Peliculas</a></li>
         <li><a href="#series">Series</a></li>
-        <li><a href="#skills">Habilidades</a></li>
-        <li><a href="#portfolio">Portafolio</a></li>
+        <li><a href="#informe">Generar Informe</a></li>
         <li><a href="#contact">Contacto</a></li>
       </ul>
     </nav>
@@ -104,8 +34,15 @@
     </div>
     
     <div class="search-container">
+      <!-- Selector de categoría -->
+      <select id="categoria">
+          <option value="all">Todo</option>
+          <option value="movie">Películas</option>
+          <option value="series">Series</option>
+      </select>
+      
       <!-- Barra de búsqueda -->
-      <input type="text" id="cajaTexto" placeholder="Buscar película...">
+      <input type="text" id="cajaTexto" placeholder="Buscar...">
       <button id="btn">Buscar</button>
     </div>
 
@@ -140,3 +77,4 @@
 
 </body>
 </html>
+

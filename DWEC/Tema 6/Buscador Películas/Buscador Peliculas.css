@@ -1,219 +1,307 @@
-/* Estilos básicos */
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    box-sizing: border-box;
+}
+  
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /*Mejor precision*/
 }
 
-/* Menu de navegación */
+/* Estilos generales para el cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #E0E0E0;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilos para el header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1F1F1F;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
 .navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .navbar .logo {
     font-size: 24px;
     font-weight: bold;
+    color: #BB86FC;
+    transition: color 0.3s;
 }
 
-.navbar ul {
+.navbar .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.navbar .hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #E0E0E0;
+    margin: 3px 0;
+}
+
+.navbar .nav-links {
     list-style: none;
     display: flex;
+    gap: 15px;
 }
 
-.navbar ul li {
-    margin: 0 15px;
-}
-
-.navbar ul li a {
-    color: white;
+.navbar .nav-links li a {
     text-decoration: none;
-    font-size: 18px;
+    color: #E0E0E0;
+    padding: 5px 10px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.navbar ul li a:hover {
-    text-decoration: underline;
+.navbar .nav-links li a:hover {
+    background-color: #BB86FC;
+    color: #1F1F1F;
+    border-radius: 5px;
 }
 
-/* Sección de películas */
-.peliculas {
-    text-align: center;
-    padding: 40px 20px;
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .navbar .hamburger {
+        display: flex;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #1F1F1F;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+    }
+}
+
+/* Estilos para la sección de películas */
+section.peliculas {
+    margin-top: 80px;
+    padding: 20px;
+    background-color: #121212;
+    color: #E0E0E0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .peliculas-title h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
+    text-align: center;
+    color: #E0E0E0;
+    transition: color 0.3s;
 }
 
-.peliculas-title span {
-    color: #3498db;
+.peliculas-title h2 span {
+    color: #BB86FC;
+    transition: color 0.3s;
 }
 
 .search-container {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-.search-container input {
+.search-container input[type="text"] {
     padding: 10px;
-    font-size: 16px;
-    width: 300px;
-    border: 2px solid #3498db;
+    width: 200px;
+    border: none;
     border-radius: 5px;
-    margin-right: 10px;
+    background-color: #1F1F1F;
+    color: #E0E0E0;
+}
+
+.search-container select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1F1F1F;
+    color: #E0E0E0;
 }
 
 .search-container button {
     padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
+    background-color: #BB86FC;
+    color: #1F1F1F;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .search-container button:hover {
-    background-color: #2980b9;
+    background-color: #CF6679;
 }
 
-.message {
-    margin-top: 20px;
+/* Resultados */
+.results p {
+    text-align: center;
     font-size: 18px;
-    color: #3498db;
+    color: #E0E0E0;
 }
 
-.peliculas-grid {
+#peliculas-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    padding: 20px;
+    gap: 20px;
 }
 
-.peliculas-grid .pelicula {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    width: 220px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.pelicula {
+    background-color: #1F1F1F;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-}
-
-.peliculas-grid .pelicula:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.peliculas-grid .pelicula img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.peliculas-grid .pelicula .info {
-    padding: 15px;
+    align-items: center;
     text-align: center;
-    background-color: #fafafa;
-    flex-grow: 1;
 }
 
-.peliculas-grid .pelicula .info h3 {
-    font-size: 20px;
-    margin: 10px 0;
-    color: #333;
-}
-
-.peliculas-grid .pelicula .info p {
-    font-size: 14px;
-    color: #777;
-}
-
-/* Botón Cargar más */
-.btn1 {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
+.pelicula img {
+    width: 180px;
+    height: 270px;
+    object-fit: cover;
     border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    margin-bottom: 10px;
 }
 
-.btn1:hover {
-    background-color: #2980b9;
+.pelicula h3 {
+    font-size: 16px;
+    color: #E0E0E0;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.pelicula:hover {
+    transform: scale(1.1);
+    background-color: #2A2A2A;
+}
+
+.pelicula .info {
+    font-size: 14px;
+    color: #BB86FC;
+    margin-top: 5px;
+}
+
+/* Detalles */
+#detalles {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; /* Agregado para asegurarse de que se ajuste bien */
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #E0E0E0;
+    padding: 40px;
+    overflow-y: auto;
+    z-index: 2000;
+}
+
+#detalles h2 {
+    margin-top: 0;
+    color: #BB86FC;
+}
+
+#detalles img {
+    max-width: 300px;
+    margin: 20px 0;
+}
+
+#cerrarDetalles {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #CF6679;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #1F1F1F;
+    transition: background-color 0.3s;
+}
+
+#cerrarDetalles:hover {
+    background-color: #BB86FC;
 }
 
 /* Footer */
 footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
+    background-color: #1F1F1F;
+    color: #E0E0E0;
     text-align: center;
-    margin-top: auto; /* Asegura que el footer esté al final */
-}
-
-footer .social-links {
-    margin-bottom: 10px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 footer .social-links a {
     margin: 0 10px;
-    color: white;
-    font-size: 24px;
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s;
 }
 
-footer p {
+footer .social-links a:hover {
+    color: #BB86FC;
+}
+
+footer .footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+footer .footer-links a {
+    color: #E0E0E0;
+    text-decoration: none;
     font-size: 14px;
+    transition: color 0.3s;
 }
 
-/* Ventana flotante de detalles */
-#detalles {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    border-radius: 10px;
-    max-width: 80%;
-    max-height: 80%;
-    overflow-y: auto;
+footer .footer-links a:hover {
+    color: #BB86FC;
 }
 
-#detalles img {
-    width: 80%;
-    height: auto;
-    border-radius: 10px;
-}
-
-/* Botón de cerrar */
-#cerrar-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-}
-
-#cerrar-btn:hover {
-    color: #e74c3c;
+/* Selectores interactivos */
+select:focus, input:focus, button:focus {
+    outline: 2px solid #BB86FC;
+    outline-offset: 2px;
 }

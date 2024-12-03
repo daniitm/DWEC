@@ -13,59 +13,89 @@ window.onload = () => {
 //Funcion para realizar la busqueda inicial
 function peticionAJAXModerna() {
     peliculaBusqueda = document.getElementById("cajaTexto").value;
-    paginaBuscar = 1; // Reiniciar la página a 1 para una nueva busqueda
+    paginaBuscar = 1; //Reiniciar la pagina a 1 para una nueva busqueda
     cargarPeliculas();
 }
 
-// Función para cargar las películas, ya sea al buscar o al hacer scroll
+//Funcion para cargar las peliculas, al buscar o al hacer scroll
 function cargarPeliculas() {
-    if (cargando) return; // Evitar hacer múltiples solicitudes mientras una ya se esté procesando
-
+    if (cargando) return; //Evitar muchas solicitudes simultaneas
     cargando = true;
-    fetch("http://www.omdbapi.com/?apikey=d535906&s=" + peliculaBusqueda + "&page=" + paginaBuscar, {method: "GET"})
+
+    //Obtener la categoria 
+    const categoria = document.getElementById("categoria").value;
+    let tipoFiltro = ""; 
+
+    //Ajustar el filtro segun la categoría seleccionada
+    if (categoria === "movie") {
+        tipoFiltro = "&type=movie"; 
+    } else if (categoria === "series") {
+        tipoFiltro = "&type=series";
+    }
+
+    fetch(`http://www.omdbapi.com/?apikey=d535906&s=${peliculaBusqueda}&page=${paginaBuscar}${tipoFiltro}`, { method: "GET" })
     .then((res) => res.json())
     .then((datosRecibidos) => {
         if (paginaBuscar === 1) {
-            // Limpiar resultados anteriores al realizar una nueva búsqueda
+            //Limpiar resultados anteriores para uuna nueva busqueda
             let peliculasContainer = document.getElementById("peliculas-container");
-            peliculasContainer.innerHTML = ""; // Limpiar los resultados previos
+            peliculasContainer.innerHTML = "";
         }
 
-        // Mostrar el número de resultados encontrados
-        document.getElementById("numeroResultados").innerHTML = "Se han encontrado " + datosRecibidos.totalResults;
+        //Manejar casos en que no se encuentren resultados
+        if (!datosRecibidos.Search) {
+            document.getElementById("numeroResultados").textContent = "No se encontraron resultados.";
+            cargando = false;
+            return;
+        }
 
-        // Añadir nuevas películas a la lista
+        //Mostrar numero de resultados
+        document.getElementById("numeroResultados").textContent = `Se han encontrado: ${datosRecibidos.totalResults}`;
+
         let peliculasContainer = document.getElementById("peliculas-container");
-
-        for (let pelicula of datosRecibidos.Search) { 
+        for (let pelicula of datosRecibidos.Search) {
             let div = document.createElement("div");
             div.classList.add("pelicula");
-            div.innerHTML = `<h3>${pelicula.Title}</h3><img src="${pelicula.Poster}" alt="${pelicula.Title}" />`;
+            
+            //Crear la imagen con un evento error
+            let img = document.createElement("img");
+            img.src = pelicula.Poster;
+            img.alt = pelicula.Title;
+            img.addEventListener("error", () => {
+                img.src = "chill.png"; //Imagen por defecto si falla la carga
+            });
+
+            //Crear el titulo
+            let titulo = document.createElement("h3");
+            titulo.textContent = pelicula.Title;
+
+            //Agregar titulo e imagen al contenedor
+            div.appendChild(titulo);
+            div.appendChild(img);
+
+            //Agregar evento de click para mostrar detalles
             div.addEventListener("click", () => detalles(pelicula.imdbID));
+
             peliculasContainer.appendChild(div);
         }
-
-        // Incrementar la página para cargar más en la siguiente llamada
-        paginaBuscar++;
-
-        // Dejar de cargar
+        paginaBuscar++; //Incrementar pagina para la siguiente carga
         cargando = false;
     })
     .catch((err) => {
-        console.error("error: ", err);
-        cargando = false;
+    console.error("error: ", err);
+    cargando = false;
     });
 }
 
-// Función para cargar más resultados cuando el usuario hace scroll
+//Funcion para scroll
 function verificarScroll() {
-    // Verificar si estamos cerca del final de la página
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 500) {
-        cargarPeliculas(); // Cargar más películas
+    //Velocidad
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 800) {
+        cargarPeliculas(); 
     }
 }
 
-// Función para mostrar los detalles de la película
+//Funcion para mostrar los detalles 
 function detalles(imdbID) {
     fetch("http://www.omdbapi.com/?apikey=d535906&i=" + imdbID, {method: "GET"})
     .then((res) => res.json())
@@ -78,13 +108,25 @@ function detalles(imdbID) {
         titulo.textContent = datosPelicula.Title;
         detallesDiv.appendChild(titulo);
 
-        let anio = document.createElement("p");
-        anio.textContent = "Año: " + datosPelicula.Year;
-        detallesDiv.appendChild(anio);
+        let fecha = document.createElement("p");
+        fecha.textContent = "Fecha de estreno: " + datosPelicula.Released;
+        detallesDiv.appendChild(fecha);
+
+        let duracion = document.createElement("p");
+        duracion.textContent = "Duración: " + datosPelicula.Runtime;
+        detallesDiv.appendChild(duracion);
+
+        let genero = document.createElement("p");
+        genero.textContent = "Género: " + datosPelicula.Genre;
+        detallesDiv.appendChild(genero);
 
         let director = document.createElement("p");
         director.textContent = "Director: " + datosPelicula.Director;
         detallesDiv.appendChild(director);
+
+        let guion = document.createElement("p");
+        guion.textContent = "Guión: " + datosPelicula.Writer;
+        detallesDiv.appendChild(guion);
 
         let actores = document.createElement("p");
         actores.textContent = "Actores: " + datosPelicula.Actors;
@@ -98,15 +140,19 @@ function detalles(imdbID) {
         poster.src = datosPelicula.Poster;
         detallesDiv.appendChild(poster);
 
-        // Mostrar la ventana flotante
+        poster.addEventListener("error", () => {
+            poster.src = "chill.png"; //Imagen por defecto si falla la carga
+        });
+
+        //Mostrar la ventana flotante
         detallesDiv.style.display = "block";
     })
     .catch((err) => console.error("error: ", err));
 }
 
-// Función para cerrar la ventana de detalles
+//Funcion para cerrar la ventana de detalles
 document.getElementById("cerrarDetalles").addEventListener("click", () => {
     let detallesDiv = document.getElementById("detalles");
-    detallesDiv.style.display = "none";  // Ocultar la ventana de detalles
+    detallesDiv.style.display = "none";  //Ocultar la ventana de detalles
 });
 
