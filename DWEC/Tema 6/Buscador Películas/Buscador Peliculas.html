@@ -8,13 +8,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Menu de Navegación -->
+  <!-- Menu de navegacion -->
   <header>
     <nav class="navbar">
       <!-- Logo -->
       <div class="logo">Daniel Triviño</div>
       
-      <!-- Barra de Búsqueda -->
+      <!-- Barra de busqueda -->
       <div class="search-container navbar-search">
         <select id="categoria">
             <option value="all">Todo</option>
@@ -25,19 +25,19 @@
         <button id="btn">Buscar</button>
       </div>
   
-      <!-- Generar Informe -->
-      <div class="infome">
+      <!-- Generar informe -->
+      <div class="informe">
         <button id="btn1">Informe</button>
       </div>
     </nav>
   </header>
 
-  <!-- Aquí esta oculto el gif para las cargas -->
+  <!-- Gif para las cargas -->
   <div id="loading" style="display: none;">
     <img src="cargando.gif" alt="Cargando...">
   </div>
 
-  <!-- Seccion de Búsqueda de Películas -->
+  <!-- Seccion de busqueda de peliculas -->
   <section class="peliculas" id="peliculas">
     <div class="peliculas-title">
       <h2>Busca tu <span>Película o Serie Favorita</span></h2>
@@ -47,14 +47,11 @@
       <p id="numeroResultados">Aún no has buscado nada</p>
     </div>
 
-    <div id="peliculas-container" class="peliculas-grid">
-        <!-- Aquí se cargarán las películas dinámicamente -->
-    </div>
+    <div id="peliculas-container" class="peliculas-grid"></div>
   </section>
 
   <div id="detalles">
     <button id="cerrarDetalles">Cerrar</button>
-    <!-- Aquí se cargarán los detalles dinámicamente -->
   </div>
 
   <div id="ventanaInforme" class="modal" style="display: none;">

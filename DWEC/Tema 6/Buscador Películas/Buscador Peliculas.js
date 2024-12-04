@@ -1,21 +1,21 @@
 //AJAX
 
-// Variables globales
+//Variables globales
 var peliculaBusqueda = "";
 var cargando = false;  
 var paginaBuscar = 1; 
 
 window.onload = () => {
-    // Eventos de click
+    //Eventos de click
     document.getElementById("btn").addEventListener("click", peticionAJAXModerna);
-    document.getElementById("btn1").addEventListener("click", mostrarInforme); // Evento para mostrar el informe
-    document.getElementById("cerrarInforme").addEventListener("click", cerrarInforme); // Evento para cerrar el informe
+    document.getElementById("btn1").addEventListener("click", mostrarInforme); //Evento para mostrar el informe
+    document.getElementById("cerrarInforme").addEventListener("click", cerrarInforme); //Evento para cerrar el informe
     window.addEventListener("scroll", verificarScroll);
 
     document.getElementById("numeroResultados").textContent = "Aún no has buscado nada";
 }
 
-// Función para mostrar y ocultar el gif
+//Funcion para mostrar y ocultar el gif
 function mostrarCargando() {
     document.getElementById("loading").style.display = "flex"; // Muestra el GIF
 }
@@ -24,14 +24,14 @@ function ocultarCargando() {
     document.getElementById("loading").style.display = "none"; // Oculta el GIF
 }
 
-// Función para realizar la búsqueda inicial
+//Función para realizar la busqueda inicial
 function peticionAJAXModerna() {
     peliculaBusqueda = document.getElementById("cajaTexto").value;
-    paginaBuscar = 1; // Reiniciar la página de búsqueda
+    paginaBuscar = 1; 
     cargarPeliculas();
 }
 
-// Función para cargar las películas (búsqueda o scroll)
+//Funcion para cargar las peliculas 
 function cargarPeliculas() {
     if (cargando) return; 
     cargando = true;
@@ -50,12 +50,12 @@ function cargarPeliculas() {
     .then((res) => res.json())
     .then((datosRecibidos) => {
         if (paginaBuscar === 1) {
-            // Limpiar resultados anteriores
+            //Limpiar resultados anteriores
             let peliculasContainer = document.getElementById("peliculas-container");
             peliculasContainer.innerHTML = "";
         }
 
-        // Manejar casos sin resultados
+        //Manejar casos sin resultados
         if (!datosRecibidos.Search) {
             document.getElementById("numeroResultados").textContent = "No se encontraron resultados.";
             cargando = false;
@@ -63,7 +63,7 @@ function cargarPeliculas() {
             return;
         }
 
-        // Mostrar el número de resultados encontrados
+        //Mostrar el número de resultados encontrados
         document.getElementById("numeroResultados").textContent = `Se han encontrado ${datosRecibidos.totalResults} resultados`;
 
         let peliculasContainer = document.getElementById("peliculas-container");
@@ -82,12 +82,12 @@ function cargarPeliculas() {
             div.appendChild(titulo);
             div.appendChild(img);
 
-            // Evento de click para mostrar detalles
+            //Evento de click para mostrar detalles
             div.addEventListener("click", () => detalles(pelicula.imdbID));
 
             peliculasContainer.appendChild(div);
         }
-        paginaBuscar++; // Aumentar la página para siguiente carga
+        paginaBuscar++; 
         cargando = false;
         ocultarCargando();
     })
@@ -98,7 +98,7 @@ function cargarPeliculas() {
     });
 }
 
-// Función para mostrar el informe
+//Funcion para mostrar el informe
 function mostrarInforme() {
     mostrarCargando();
 
@@ -176,86 +176,86 @@ function mostrarInforme() {
         });
 }
 
-// Función para cerrar el informe
+//Funcion para cerrar el informe
 function cerrarInforme() {
     document.getElementById("ventanaInforme").style.display = "none";
-    document.getElementById("overlay").style.display = "none"; // Ocultar el overlay
-    document.body.style.overflow = ""; // Restaurar scroll en el fondo
+    document.getElementById("overlay").style.display = "none"; 
+    document.body.style.overflow = ""; 
 }
 
-// Función para cerrar el informe
+//Funcion para cerrar el informe
 function cerrarInforme() {
     document.getElementById("ventanaInforme").style.display = "none";
 }
 
-// Función para scroll
+//Funcion para scroll
 function verificarScroll() {
-    // Verificar si el usuario ha llegado al final de la página
+    //Verificacion del final de la pagina
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1000) {
         cargarPeliculas(); 
     }
 }
 
-// Función para mostrar los detalles de una película
+//Funcion para mostrar los detalles de una pelicula
 function detalles(imdbID) {
-    mostrarCargando(); // Mostrar el GIF mientras se cargan los detalles
+    mostrarCargando(); //Mostrar el GIF mientras se cargan los detalles
     fetch("http://www.omdbapi.com/?apikey=d535906&i=" + imdbID, {method: "GET"}).then((res) => res.json())
     .then((datosPelicula) => {
         let detallesDiv = document.getElementById("detalles");
 
-        // Limpiar todo el contenido previo (excepto el botón de cerrar)
+        //Limpiar todo el contenido previo 
         const elementosDetalles = detallesDiv.querySelectorAll("h2, p, img, h3");
         elementosDetalles.forEach(elemento => elemento.remove());
 
-        // Agregar el título de la película
+        //Agregar el titulo de la pelicula
         let titulo = document.createElement("h2");
         titulo.textContent = datosPelicula.Title;
         detallesDiv.appendChild(titulo);
 
-        // Agregar la fecha de estreno
+        //Agregar la fecha de estreno
         let fecha = document.createElement("p");
         fecha.textContent = "Fecha de estreno: " + datosPelicula.Released;
         detallesDiv.appendChild(fecha);
 
-        // Agregar la duración
+        //Agregar la duracion
         let duracion = document.createElement("p");
         duracion.textContent = "Duración: " + datosPelicula.Runtime;
         detallesDiv.appendChild(duracion);
 
-        // Agregar el género
+        //Agregar el genero
         let genero = document.createElement("p");
         genero.textContent = "Género: " + datosPelicula.Genre;
         detallesDiv.appendChild(genero);
 
-        // Agregar el director
+        //Agregar el director
         let director = document.createElement("p");
         director.textContent = "Director: " + datosPelicula.Director;
         detallesDiv.appendChild(director);
 
-        // Agregar el guion
+        //Agregar el guion
         let guion = document.createElement("p");
         guion.textContent = "Guión: " + datosPelicula.Writer;
         detallesDiv.appendChild(guion);
 
-        // Agregar los actores
+        //Agregar los actores
         let actores = document.createElement("p");
         actores.textContent = "Actores: " + datosPelicula.Actors;
         detallesDiv.appendChild(actores);
 
-        // Agregar la sinopsis
+        //Agregar la sinopsis
         let sinopsis = document.createElement("p");
         sinopsis.textContent = "Sinopsis: " + datosPelicula.Plot;
         detallesDiv.appendChild(sinopsis);
 
-        // Agregar el poster de la película
+        //Agregar el poster 
         let poster = document.createElement("img");
         poster.src = datosPelicula.Poster;
         detallesDiv.appendChild(poster);
         poster.addEventListener("error", () => {
-            poster.src = "disponible.png"; // Poster por defecto si falla la carga
+            poster.src = "disponible.png"; 
         });
 
-        // Mostrar las calificaciones si existen
+        //Mostrar las calificaciones si existen
         if (datosPelicula.Ratings && datosPelicula.Ratings.length > 0) {
             let calificacionesTitle = document.createElement("h3");
             calificacionesTitle.textContent = "Calificaciones:";
@@ -268,25 +268,25 @@ function detalles(imdbID) {
             });
         }
 
-        // Mostrar la ventana flotante con los detalles
+        //Mostrar la ventana flotante con los detalles
         detallesDiv.style.display = "block";
         
-        // Deshabilitar el scroll en la página principal
+        //Deshabilitar el scroll en la pagina principal
         document.body.style.overflow = "hidden";
 
-        ocultarCargando(); // Ocultar el GIF después de que los detalles se hayan cargado
+        ocultarCargando(); //Ocultar el GIF después de que los detalles se hayan cargado
     })
     .catch((err) => {
         console.error("error: ", err);
-        ocultarCargando(); // Ocultar el GIF si ocurre un error
+        ocultarCargando(); //Ocultar el GIF si ocurre un error
     });
 }
 
-// Función para cerrar la ventana de detalles
+//Funcion para cerrar la ventana de detalles
 document.getElementById("cerrarDetalles").addEventListener("click", () => {
     let detallesDiv = document.getElementById("detalles");
-    detallesDiv.style.display = "none";  // Ocultar la ventana de detalles
+    detallesDiv.style.display = "none";  //Ocultar la ventana de detalles
     
-    // Restaurar el scroll en la página principal
+    //Restaurar el scroll en la pagina principal
     document.body.style.overflow = "";
 });
