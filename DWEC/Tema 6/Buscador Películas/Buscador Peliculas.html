@@ -11,21 +11,31 @@
   <!-- Menu de Navegación -->
   <header>
     <nav class="navbar">
+      <!-- Logo -->
       <div class="logo">Daniel Triviño</div>
-      <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+      
+      <!-- Barra de Búsqueda -->
+      <div class="search-container navbar-search">
+        <select id="categoria">
+            <option value="all">Todo</option>
+            <option value="movie">Películas</option>
+            <option value="series">Series</option>
+        </select>
+        <input type="text" id="cajaTexto" placeholder="Buscar...">
+        <button id="btn">Buscar</button>
       </div>
-      <ul class="nav-links">
-        <li><a href="#home">Inicio</a></li>
-        <li><a href="#peliculas">Películas</a></li>
-        <li><a href="#series">Series</a></li>
-        <li><a href="#informe">Informe</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
+  
+      <!-- Generar Informe -->
+      <div class="infome">
+        <button id="btn1">Informe</button>
+      </div>
     </nav>
   </header>
+
+  <!-- Aquí esta oculto el gif para las cargas -->
+  <div id="loading" style="display: none;">
+    <img src="cargando.gif" alt="Cargando...">
+  </div>
 
   <!-- Seccion de Búsqueda de Películas -->
   <section class="peliculas" id="peliculas">
@@ -33,26 +43,8 @@
       <h2>Busca tu <span>Película o Serie Favorita</span></h2>
     </div>
     
-    <div class="search-container">
-      
-      <!-- Selector de categoría -->
-      <select id="categoria">
-          <option value="all">Todo</option>
-          <option value="movie">Películas</option>
-          <option value="series">Series</option>
-      </select>
-      
-      <!-- Barra de búsqueda -->
-      <input type="text" id="cajaTexto" placeholder="Buscar...">
-      <button id="btn">Buscar</button>
-    </div>
-
-    <div id="message" class="message" style="display:none;">
-      <p>¡Disfruta de las películas!</p>
-    </div>
-
     <div class="results">
-        <p id="numeroResultados">Se han encontrado: 0</p>
+      <p id="numeroResultados">Aún no has buscado nada</p>
     </div>
 
     <div id="peliculas-container" class="peliculas-grid">
@@ -63,6 +55,28 @@
   <div id="detalles">
     <button id="cerrarDetalles">Cerrar</button>
     <!-- Aquí se cargarán los detalles dinámicamente -->
+  </div>
+
+  <div id="ventanaInforme" class="modal" style="display: none;">
+    <div class="modal-contenido">
+      <span id="cerrarInforme" class="cerrar">&times;</span>
+      <h2>Informe de Películas</h2>
+      
+      <div id="peliculasValoradas">
+        <h3>Películas Más Valoradas (IMDB Rating)</h3>
+        <ul id="listadoValoradas"></ul>
+      </div>
+      
+      <div id="peliculasRecaudacion">
+        <h3>Películas con Mayor Recaudación</h3>
+        <ul id="listadoRecaudacion"></ul>
+      </div>
+  
+      <div id="peliculasVotadas">
+        <h3>Películas Más Votadas</h3>
+        <ul id="listadoVotadas"></ul>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -78,4 +92,3 @@
 
 </body>
 </html>
-

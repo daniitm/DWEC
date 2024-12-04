@@ -1,309 +1,368 @@
-* {
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%; /* Asegura que el html y body ocupen toda la altura de la pantalla */
-    margin: 0; /* Elimina cualquier margen predeterminado */
-    padding: 0; /* Elimina cualquier relleno predeterminado */
-    display: flex; /* Hacemos que el body sea un contenedor flexible */
-    flex-direction: column; /* Colocamos los elementos en una columna */
-}
-
+/* Estilos básicos */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background-color: #121212;
-    color: #E0E0E0;
-    overflow-x: hidden;
-    transition: background-color 0.3s, color 0.3s;
-    flex: 1; /* Esto hace que el contenido principal se expanda para llenar el espacio disponible */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Estilos para el header */
-header {
-    position: fixed;
-    padding: 10px 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #1F1F1F;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-}
-
+/* Menu de navegación */
 .navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    max-width: 1200px;
-    margin: auto;
+    height: 80px;
 }
 
 .navbar .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #BB86FC;
-    transition: color 0.3s;
 }
 
-.navbar .hamburger {
-    display: none;
-    flex-direction: column;
+/* Estilo para el botón Informe */
+.infome button {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.navbar .hamburger span {
-    height: 3px;
-    width: 25px;
-    background: #E0E0E0;
-    margin: 3px 0;
+/* Efecto hover para el botón Informe */
+.infome button:hover {
+    background-color: #2980b9; /* Cambio de color en hover */
 }
 
-.navbar .nav-links {
-    list-style: none;
+/* Estilo para la barra de búsqueda */
+.navbar-search {
     display: flex;
-    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espacio entre los elementos del contenedor */
+    border-radius: 30px; /* Bordes redondeados */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.navbar .nav-links li a {
-    text-decoration: none;
-    color: #E0E0E0;
-    padding: 5px 10px;
-    transition: background-color 0.3s, color 0.3s;
+/* Estilo para el campo de entrada de búsqueda */
+.navbar-search input[type="text"] {
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 250px; /* Ancho fijo, puedes ajustarlo según prefieras */
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.navbar .nav-links li a:hover {
-    background-color: #BB86FC;
-    color: #1F1F1F;
-    border-radius: 5px;
+.navbar-search input[type="text"]:focus {
+    border-color: #3498db; /* Color de borde azul cuando tiene foco */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Sombra suave al enfocar */
 }
 
-/* Media queries para dispositivos móviles */
-@media (max-width: 768px) {
-    .navbar .hamburger {
-        display: flex;
-    }
-
-    .navbar .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #1F1F1F;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-    }
-
-    .navbar .nav-links.active {
-        display: flex;
-    }
+/* Estilo para el selector de categorías */
+.navbar-search select {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* Estilos para la sección de películas */
-section.peliculas {
-    margin-top: 80px;
-    padding: 50px;
-    background-color: #121212;
-    color: #E0E0E0;
-    transition: background-color 0.3s, color 0.3s;
+.navbar-search select:hover {
+    border-color: #3498db; /* Color de borde al pasar el ratón */
+}
+
+/* Estilo para el botón de búsqueda */
+.navbar-search button {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-search button:hover {
+    background-color: #2980b9; /* Cambio de color en hover */
+}
+
+/* Sección de películas */
+.peliculas {
+    text-align: center;
+    padding: 40px 20px;
 }
 
 .peliculas-title h2 {
-    text-align: center;
-    color: #E0E0E0;
-    transition: color 0.3s;
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
-.peliculas-title h2 span {
-    color: #BB86FC;
-    transition: color 0.3s;
+.peliculas-title span {
+    color: #3498db;
 }
 
-.search-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.search-container input[type="text"] {
-    padding: 10px;
-    width: 200px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1F1F1F;
-    color: #E0E0E0;
-}
-
-.search-container select {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1F1F1F;
-    color: #E0E0E0;
-}
-
-.search-container button {
-    padding: 10px 20px;
-    background-color: #E0E0E0;
-    color: #1F1F1F;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.search-container button:hover {
-    background-color: #BB86FC;
-}
-
-/* Resultados */
-.results p {
-    text-align: center;
-    font-size: 18px;
-    color: #E0E0E0;
-}
-
-#peliculas-container {
+/* Grid de películas */
+.peliculas-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
+    padding: 20px;
 }
 
-.pelicula {
-    background-color: #1F1F1F;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    width: 200px;
-    transition: transform 0.3s, background-color 0.3s;
-    cursor: pointer;
+/* Película */
+.peliculas-grid .pelicula {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+}
+
+/* Hover para efectos */
+.peliculas-grid .pelicula:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de la película */
+.peliculas-grid .pelicula img {
+    width: 100%;
+    height: 300px; /* Altura fija para la imagen */
+    object-fit: cover; /* Asegura que la imagen se recorte adecuadamente */
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Información de la película */
+.peliculas-grid .pelicula .info {
+    padding: 15px;
     text-align: center;
+    background-color: #fafafa;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.pelicula img {
-    width: 180px;
-    height: 270px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
+/* Título de la película */
+.peliculas-grid .pelicula .info h3 {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #333;
+    height: 50px; /* Altura fija para el título */
+    overflow: hidden; /* En caso de títulos largos */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es muy largo */
 }
 
-.pelicula h3 {
-    font-size: 16px;
-    color: #E0E0E0;
-    margin: 0;
+/* Descripción de la película */
+.peliculas-grid .pelicula .info p {
+    font-size: 14px;
+    color: #777;
+    margin: 5px 0;
+    height: 80px; /* Limita la altura de la descripción */
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
 }
 
-.pelicula:hover {
-    transform: scale(1.1);
-    background-color: #2A2A2A;
-}
-
-.pelicula .info {
-    font-size: 14px;
-    color: #BB86FC;
-    margin-top: 5px;
-}
-
-/* Detalles */
-#detalles {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0; /* Agregado para asegurarse de que se ajuste bien */
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #E0E0E0;
-    padding: 40px;
-    overflow-y: auto;
-    z-index: 2000;
-}
-
-#detalles h2 {
-    margin-top: 0;
-    color: #BB86FC;
-}
-
-#detalles img {
-    max-width: 300px;
-    margin: 20px 0;
-}
-
-#cerrarDetalles {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #E0E0E0;
-    border: none;
+/* Botón Cargar más */
+.btn1 {
     padding: 10px 20px;
-    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
     border-radius: 5px;
-    color: #1F1F1F;
-    transition: background-color 0.3s;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-#cerrarDetalles:hover {
-    background-color: #BB86FC;
+.btn1:hover {
+    background-color: #2980b9;
 }
 
 /* Footer */
 footer {
-    background-color: #1F1F1F;
-    color: #E0E0E0;
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
     text-align: center;
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top: auto; /* Esto asegura que el footer siempre esté al final */
+    margin-top: auto; /* Asegura que el footer esté al final */
+    height: 60px;
+}
+
+footer .social-links {
+    margin-bottom: 10px;
 }
 
 footer .social-links a {
     margin: 0 10px;
-    color: #E0E0E0;
-    text-decoration: none;
-    font-size: 20px;
-    transition: color 0.3s;
+    color: white;
+    font-size: 24px;
 }
 
-footer .social-links a:hover {
-    color: #BB86FC;
-}
-
-footer .footer-links {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-footer .footer-links a {
-    color: #E0E0E0;
-    text-decoration: none;
+footer p {
     font-size: 14px;
-    transition: color 0.3s;
 }
 
-footer .footer-links a:hover {
-    color: #BB86FC;
+/* Ventana flotante de detalles */
+#detalles {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-radius: 10px;
+    width: 800px; /* Tamaño fijo para la ventana */
+    max-height: 90vh; /* Limita la altura de la ventana al 90% de la pantalla */
+    overflow-y: auto; /* Activa el desplazamiento vertical si el contenido excede el espacio */
 }
 
-/* Selectores interactivos */
-select:focus, input:focus, button:focus {
-    outline: 2px solid #BB86FC;
-    outline-offset: 2px;
+/* Asegura que la imagen esté centrada y no se estire */
+#detalles img {
+    width: auto;
+    max-width: 100%; /* La imagen nunca será más ancha que el contenedor */
+    height: auto;
+    max-height: 80%; /* Limita la altura para que no se estire más de lo necesario */
+    display: block;
+    margin: 0 auto; /* Centra la imagen dentro del contenedor */
 }
+
+
+
+/* Estilo para el botón cerrar en la ventana de detalles */
+#cerrarDetalles {
+    position: absolute;
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    right: 10px; /* Coloca el botón a la derecha */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover */
+#cerrarDetalles:hover {
+    background-color: #2980b9; /* Cambio de color en hover */
+}
+
+/* Estilo para el contenedor de la ventana de detalles */
+#detalles {
+    display: none; /* Se muestra solo cuando es visible */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-radius: 10px;
+    width: 80%; /* Tamaño de la ventana */
+    max-width: 800px; /* Ancho máximo */
+    max-height: 80vh; /* Limita la altura al 80% de la pantalla */
+    overflow-y: auto; /* Desplazamiento vertical si el contenido excede el espacio */
+}
+
+/* Estilos para el gif de carga */
+#loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 9999;
+    text-align: center;
+}
+
+#loading img {
+    width: 100px;
+    height: auto;
+}
+
+/* Estilos para la ventana modal */
+.modal {
+    display: none; /* Ocultada por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-contenido {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .cerrar {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .cerrar:hover,
+  .cerrar:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  #peliculasValoradas, #peliculasRecaudacion, #peliculasVotadas {
+    margin-top: 20px;
+  }
+  
+  h3 {
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    margin-bottom: 8px;
+  }
