@@ -186,6 +186,8 @@ function cerrarInforme() {
 //Funcion para cerrar el informe
 function cerrarInforme() {
     document.getElementById("ventanaInforme").style.display = "none";
+    //Restaurar el scroll en la pagina principal
+    document.body.style.overflow = "";
 }
 
 //Funcion para scroll
