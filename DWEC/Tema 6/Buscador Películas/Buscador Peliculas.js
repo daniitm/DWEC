@@ -100,88 +100,87 @@ function cargarPeliculas() {
 
 // Función para mostrar el informe
 function mostrarInforme() {
-    mostrarCargando(); // Mostrar GIF de carga
+    mostrarCargando();
 
-    // Obtener el término de búsqueda de la caja de texto
     let terminoBusqueda = document.getElementById("cajaTexto").value;
-    
-    // Realizar tres peticiones distintas basadas en el término de búsqueda
-    Promise.all([
-        fetch(`http://www.omdbapi.com/?apikey=d535906&s=${terminoBusqueda}&type=`), // Películas más valoradas (por ejemplo, IMDb Rating)
-        fetch(`http://www.omdbapi.com/?apikey=d535906&s=${terminoBusqueda}&type=`), // Películas con mayor recaudación
-        fetch(`http://www.omdbapi.com/?apikey=d535906&s=${terminoBusqueda}&type=`)  // Películas más votadas
-    ])
-    .then(([resValoradas, resRecaudacion, resVotadas]) => {
-        return Promise.all([resValoradas.json(), resRecaudacion.json(), resVotadas.json()]);
-    })
-    .then(([datosValoradas, datosRecaudacion, datosVotadas]) => {
-        // Limpiar el contenido previo de las listas (si es necesario)
-        let listadoValoradas = document.getElementById("listadoValoradas");
-        listadoValoradas.innerHTML = "";
 
-        let listadoRecaudacion = document.getElementById("listadoRecaudacion");
-        listadoRecaudacion.innerHTML = "";
+    fetch(`http://www.omdbapi.com/?apikey=d535906&s=${terminoBusqueda}&type=`)
+        .then((res) => res.json())
+        .then((datosBusqueda) => {
+            if (!datosBusqueda.Search) {
+                alert("No se encontraron resultados para generar el informe.");
+                ocultarCargando();
+                return;
+            }
 
-        let listadoVotadas = document.getElementById("listadoVotadas");
-        listadoVotadas.innerHTML = "";
+            let promesasDetalles = datosBusqueda.Search.map(pelicula =>
+                fetch(`http://www.omdbapi.com/?apikey=d535906&i=${pelicula.imdbID}`)
+                    .then((res) => res.json())
+            );
 
-        // Agregar las películas más valoradas (IMDB Rating)
-        if (datosValoradas.Search) {
-            // Ordenar por IMDb Rating de mayor a menor (aunque en la API no podemos ordenarlo directamente)
-            let valoradasOrdenadas = datosValoradas.Search.sort((a, b) => parseFloat(b.imdbRating) - parseFloat(a.imdbRating));
-            valoradasOrdenadas.slice(0, 5).forEach(pelicula => {
-                let li = document.createElement("li");
-                li.textContent = `${pelicula.Title} - IMDB Rating: ${pelicula.imdbRating}`;
-                listadoValoradas.appendChild(li);
-            });
-        }
+            Promise.all(promesasDetalles)
+                .then((detallesPeliculas) => {
+                    let listadoValoradas = document.getElementById("listadoValoradas");
+                    listadoValoradas.innerHTML = "";
 
-        // Agregar las películas con mayor recaudación
-        if (datosRecaudacion.Search) {
-            // Ordenar por Recaudación de mayor a menor
-            let recaudoOrdenado = datosRecaudacion.Search.sort((a, b) => {
-                // Convertir BoxOffice a número o asignar 0 si no es válido
-                let recaudoA = parseFloat(a.BoxOffice?.replace(/[^\d.-]/g, '')) || 0;
-                let recaudoB = parseFloat(b.BoxOffice?.replace(/[^\d.-]/g, '')) || 0;
+                    let listadoRecaudacion = document.getElementById("listadoRecaudacion");
+                    listadoRecaudacion.innerHTML = "";
 
-                return recaudoB - recaudoA; // Ordenar de mayor a menor
-            });
+                    let listadoVotadas = document.getElementById("listadoVotadas");
+                    listadoVotadas.innerHTML = "";
 
-            // Mostrar los primeros 5
-            recaudoOrdenado.slice(0, 5).forEach(pelicula => {
-                let li = document.createElement("li");
-                li.textContent = `${pelicula.Title} - Recaudación: ${pelicula.BoxOffice || "No disponible"}`;
-                listadoRecaudacion.appendChild(li);
-            });
-        }
+                    let valoradasOrdenadas = [...detallesPeliculas].sort((a, b) => 
+                        parseFloat(b.imdbRating) - parseFloat(a.imdbRating)
+                    );
+                    valoradasOrdenadas.slice(0, 5).forEach((pelicula) => {
+                        let li = document.createElement("li");
+                        li.textContent = `${pelicula.Title} - IMDB Rating: ${pelicula.imdbRating || "No disponible"}`;
+                        listadoValoradas.appendChild(li);
+                    });
 
-        // Agregar las películas más votadas
-        if (datosVotadas.Search) {
-            // Ordenar por número de votos de mayor a menor
-            let votadasOrdenadas = datosVotadas.Search.sort((a, b) => {
-                // Convertir imdbVotes a número o asignar 0 si no es válido
-                let votosA = parseInt(a.imdbVotes?.replace(/,/g, '')) || 0;
-                let votosB = parseInt(b.imdbVotes?.replace(/,/g, '')) || 0;
+                    let recaudoOrdenado = [...detallesPeliculas].sort((a, b) => {
+                        let recaudoA = parseFloat(a.BoxOffice?.replace(/[^\d.-]/g, '')) || 0;
+                        let recaudoB = parseFloat(b.BoxOffice?.replace(/[^\d.-]/g, '')) || 0;
+                        return recaudoB - recaudoA;
+                    });
+                    recaudoOrdenado.slice(0, 5).forEach((pelicula) => {
+                        let li = document.createElement("li");
+                        li.textContent = `${pelicula.Title} - Recaudación: ${pelicula.BoxOffice || "No disponible"}`;
+                        listadoRecaudacion.appendChild(li);
+                    });
 
-                return votosB - votosA; // Ordenar de mayor a menor
-            });
+                    let votadasOrdenadas = [...detallesPeliculas].sort((a, b) => {
+                        let votosA = parseInt(a.imdbVotes?.replace(/,/g, '')) || 0;
+                        let votosB = parseInt(b.imdbVotes?.replace(/,/g, '')) || 0;
+                        return votosB - votosA;
+                    });
+                    votadasOrdenadas.slice(0, 5).forEach((pelicula) => {
+                        let li = document.createElement("li");
+                        li.textContent = `${pelicula.Title} - Votos: ${pelicula.imdbVotes || "No disponible"}`;
+                        listadoVotadas.appendChild(li);
+                    });
 
-            // Mostrar los primeros 5
-            votadasOrdenadas.slice(0, 5).forEach(pelicula => {
-                let li = document.createElement("li");
-                li.textContent = `${pelicula.Title} - Votos: ${pelicula.imdbVotes || "No disponible"}`;
-                listadoVotadas.appendChild(li);
-            });
-        }
+                    document.getElementById("ventanaInforme").style.display = "block";
+                    document.body.style.overflow = "hidden"; // Bloquear scroll en el fondo
 
-        // Mostrar la ventana del informe
-        document.getElementById("ventanaInforme").style.display = "block";
-        ocultarCargando(); // Ocultar el GIF de carga
-    })
-    .catch((err) => {
-        console.error("Error:", err);
-        ocultarCargando();
-    });
+                    ocultarCargando();
+                })
+                .catch((err) => {
+                    console.error("Error al obtener los detalles de las películas:", err);
+                    ocultarCargando();
+                });
+        })
+        .catch((err) => {
+            console.error("Error al buscar las películas:", err);
+            ocultarCargando();
+        });
+}
+
+// Función para cerrar el informe
+function cerrarInforme() {
+    document.getElementById("ventanaInforme").style.display = "none";
+    document.getElementById("overlay").style.display = "none"; // Ocultar el overlay
+    document.body.style.overflow = ""; // Restaurar scroll en el fondo
 }
 
 // Función para cerrar el informe
@@ -291,6 +290,3 @@ document.getElementById("cerrarDetalles").addEventListener("click", () => {
     // Restaurar el scroll en la página principal
     document.body.style.overflow = "";
 });
-
-
-

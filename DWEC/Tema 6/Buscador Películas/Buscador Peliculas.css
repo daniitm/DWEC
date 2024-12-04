@@ -276,24 +276,6 @@ footer p {
     background-color: #2980b9; /* Cambio de color en hover */
 }
 
-/* Estilo para el contenedor de la ventana de detalles */
-#detalles {
-    display: none; /* Se muestra solo cuando es visible */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    border-radius: 10px;
-    width: 80%; /* Tamaño de la ventana */
-    max-width: 800px; /* Ancho máximo */
-    max-height: 80vh; /* Limita la altura al 80% de la pantalla */
-    overflow-y: auto; /* Desplazamiento vertical si el contenido excede el espacio */
-}
-
 /* Estilos para el gif de carga */
 #loading {
     display: none;
