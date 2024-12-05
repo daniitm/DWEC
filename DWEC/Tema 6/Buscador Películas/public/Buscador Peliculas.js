@@ -46,7 +46,7 @@ function cargarPeliculas() {
         tipoFiltro = "&type=series";
     }
 
-    fetch(`http://www.omdbapi.com/?apikey=d535906&s=${peliculaBusqueda}&page=${paginaBuscar}${tipoFiltro}`, { method: "GET" })
+    fetch(`https://www.omdbapi.com/?apikey=d535906&s=${peliculaBusqueda}&page=${paginaBuscar}${tipoFiltro}`, { method: "GET" })
     .then((res) => res.json())
     .then((datosRecibidos) => {
         if (paginaBuscar === 1) {
@@ -104,7 +104,7 @@ function mostrarInforme() {
 
     let terminoBusqueda = document.getElementById("cajaTexto").value;
 
-    fetch(`http://www.omdbapi.com/?apikey=d535906&s=${terminoBusqueda}&type=`)
+    fetch(`https://www.omdbapi.com/?apikey=d535906&s=${terminoBusqueda}&type=`)
         .then((res) => res.json())
         .then((datosBusqueda) => {
             if (!datosBusqueda.Search) {
@@ -114,7 +114,7 @@ function mostrarInforme() {
             }
 
             let promesasDetalles = datosBusqueda.Search.map(pelicula =>
-                fetch(`http://www.omdbapi.com/?apikey=d535906&i=${pelicula.imdbID}`)
+                fetch(`https://www.omdbapi.com/?apikey=d535906&i=${pelicula.imdbID}`)
                     .then((res) => res.json())
             );
 
@@ -201,7 +201,7 @@ function verificarScroll() {
 //Funcion para mostrar los detalles de una pelicula
 function detalles(imdbID) {
     mostrarCargando(); //Mostrar el GIF mientras se cargan los detalles
-    fetch("http://www.omdbapi.com/?apikey=d535906&i=" + imdbID, {method: "GET"}).then((res) => res.json())
+    fetch("https://www.omdbapi.com/?apikey=d535906&i=" + imdbID, {method: "GET"}).then((res) => res.json())
     .then((datosPelicula) => {
         let detallesDiv = document.getElementById("detalles");
 
