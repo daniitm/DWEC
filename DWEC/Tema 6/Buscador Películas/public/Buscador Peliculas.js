@@ -292,3 +292,105 @@ document.getElementById("cerrarDetalles").addEventListener("click", () => {
     //Restaurar el scroll en la pagina principal
     document.body.style.overflow = "";
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Función para agregar un producto al carrito
+function agregarAlCarrito(productId, title, price) {
+    const productoExistente = carrito.find(producto => producto.id === productId);
+  
+    if (productoExistente) {
+      productoExistente.cantidad += 1; // Si ya existe en el carrito, solo aumentamos la cantidad
+    } else {
+      carrito.push({ id: productId, title, price, cantidad: 1 }); // Si no existe, lo agregamos
+    }
+  
+    actualizarCarrito(); // Actualizamos el carrito
+  }
+  
+  
+  
+  
+  // Función para mostrar el carrito
+  function mostrarCarrito() { 
+    mostrarCargando(); // Llama a la función para mostrar un indicador de carga 
+  
+    // Limpiar la lista actual del carrito 
+    let listadoCarrito = document.getElementById("listadoCarrito"); 
+    listadoCarrito.innerHTML = ""; 
+  
+    // Verificar si el carrito está vacío 
+    if (carrito.length === 0) { 
+        alert("El carrito está vacío."); 
+        ocultarCargando(); // Oculta el indicador de carga 
+        return; 
+    } 
+  
+    // Mostrar los productos en el carrito 
+    carrito.forEach(item => { 
+        let li = document.createElement("li"); 
+        li.textContent = `${item.title} - ${item.cantidad} x ${item.price} €`; 
+        listadoCarrito.appendChild(li); 
+    }); 
+  
+    // Mostrar la ventana modal 
+    document.getElementById("ventanaCarrito").style.display = "block"; 
+    document.body.style.overflow = "hidden"; // Bloquear scroll en el fondo 
+  
+    // Actualizar el contador de productos en el botón del carrito 
+    document.getElementById("btnCarrito").textContent = `Carrito (${carrito.length})`; 
+  
+    ocultarCargando(); // Oculta el indicador de carga 
+  }
+  
+  // Función para cerrar el carrito 
+  function cerrarCarrito() { 
+    document.getElementById("ventanaCarrito").style.display = "none"; 
+    document.body.style.overflow = ""; // Restaurar el scroll en el fondo 
+  }
+  
+  // Función para realizar un pedido
+  function realizarPedido() {
+    if (carrito.length === 0) {
+        alert("El carrito está vacío. No puedes realizar un pedido.");
+        return;
+    }
+  
+    // Aquí podrías hacer la lógica para procesar el pedido, como enviar la información al servidor
+    alert("Pedido realizado con éxito.");
+  
+    // Limpiar el carrito después de realizar el pedido
+    carrito = [];
+    actualizarCarrito();
+    cerrarCarrito(); // Cerrar el carrito después de realizar el pedido
+  }
+  
+  // Función para actualizar el carrito
+  function actualizarCarrito() {
+    // Actualizar el contador de productos en el carrito
+    document.getElementById("btnCarrito").textContent = `Carrito (${carrito.length})`;
+  
+    // Si el carrito está vacío, ocultar el botón de "Realizar Pedido"
+    if (carrito.length === 0) {
+        document.getElementById("realizarPedido").style.display = "none";
+    } else {
+        document.getElementById("realizarPedido").style.display = "block";
+    }
+  }
+  

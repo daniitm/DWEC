@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <ul><a href="/">Tienda Online</a></ul>
+      </div>
+      <div>
+        <div class="login">
+          <button id="btnLogin"><i class="fa-solid fa-user"></i></button>
+        </div>
+        <div class="carrito">
+          <button id="btnCarrito"><i class="fa-solid fa-cart-shopping"></i> <span id="carritoCount">(0)</span></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div id="loading" style="display: none;">
+    <img src="img/cargando.gif" alt="Cargando...">
+  </div>
+
+  <section id="inicio" class="inicio">
+    <img src="img/inicio.png" alt="Imagen de fondo de inicio" class="imagen-inicio"/>
+    <div class="texto-inicio">
+      <h1>Bienvenido a nuestra tienda online</h1>
+      <p>Descubre productos increíbles seleccionados solo para ti</p>
+    </div>
+  </section>
+
+  <section class="categorias" id="categorias">  
+    <div class="categorias-title">
+      <h2>Explora las <span>Categorías</span></h2>
+    </div>
+    <div id="categorias-container" class="categorias-grid"></div>
+  </section>
+
+  <section class="productos" id="productos" style="display: none;">  
+    <div class="productos-title">
+      <h2>Busca tus <span>Productos Favoritos</span></h2>
+    </div>
+    <div class="results"></div>
+    <div id="productos-container" class="productos-grid"></div>
+    <button id="verMas" style="display: none;">Ver más</button>
+  </section>
+
+  <div id="detalles" style="display: none;">
+    <button id="cerrarDetalles">Cerrar</button>
+  </div>
+
+  <div id="ventanaCarrito" style="display: none;"> 
+    <h2>Carrito de la compra</h2>
+    <ul id="listadoCarrito">
+      <button id="+">+</button>
+      <button id="-">-</button>
+      <button id="Eliminar">Eliminar</button>
+    </ul> 
+    <div id="carritoResumen">
+      <p>Total: <span id="carritoTotal">0.00</span> €</p>
+    </div>
+    <button id="realizarPedido">Realizar Pedido</button>
+    <button id="cerrarCarrito">Cerrar</button>
+  </div>
+
+  <div id="fondoOscuro" style="display: none;"></div>
+
+  <div id="mensajePedido" style="display: none;">Pedido realizado con éxito. ¡Gracias por tu compra!</div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">Servicios de tienda</a></li>
+          <li><a href="#">Trámite de devolución</a></li>
+          <li><a href="#">Tarjeta regalo</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Nosotros</h4>
+        <ul>
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Preferencias de cookies</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Condiciones de compra</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Métodos de pago</h4>
+        <div class="payment-icons">
+          <a href="https://www.visa.es"><i class="fa-brands fa-cc-visa"></i></a>
+          <a href="https://www.mastercard.es/es-es.html"><i class="fa-brands fa-cc-mastercard"></i></a>
+          <a href="https://www.paypal.com/es/home"><i class="fa-brands fa-paypal"></i></a>
+        </div>
+        <br>
+        <h4>Nuestras redes sociales</h4>
+        <div class="social-links">
+          <a href="https://github.com/daniitm"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+    <p>Daniel Triviño ©</p>
+  </footer>
+
+  <script src="javascript.js"></script>
+</body>
+</html>
