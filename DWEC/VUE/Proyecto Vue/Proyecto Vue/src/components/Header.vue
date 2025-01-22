@@ -20,7 +20,7 @@ function handleClearCompleted(event) {
     <h1>Gestor de Tareas</h1>
     <p>📊 {{ pendingTasks }} tareas pendientes de un total de {{ totalTasks }} tareas</p>
     <div class="actions">
-      <a href="javascript:void(0);" class="clear-completed" @click.prevent="handleClearCompleted">🗑️ Borrar tareas completadas</a>
+      <a href="#" class="clear-completed" @click.prevent="handleClearCompleted">🗑️ Borrar tareas completadas</a>
     </div>
   </header>
 </template>

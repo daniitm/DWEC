@@ -105,8 +105,8 @@ async function deleteTask(taskId) {
   if (!user.value) return;
   try {
     await deleteDoc(doc(db, 'recordatorios', taskId));
-    tasks.value = tasks.value.filter(task => task.id !== taskId);
     console.log(`Tarea con ID ${taskId} eliminada correctamente`);
+    tasks.value = tasks.value.filter(task => task.id !== taskId);
   } catch (error) {
     console.error("Error al eliminar tarea:", error);
   }
@@ -117,9 +117,13 @@ async function clearCompletedTasks() {
   console.log("Iniciando clearCompletedTasks");
   try {
     const completedTasks = tasks.value.filter(task => task.completed);
-    const deletePromises = completedTasks.map(task => deleteDoc(doc(db, 'recordatorios', task.id)));
-    await Promise.all(deletePromises);
-    tasks.value = tasks.value.filter(task => !task.completed);
+    console.log(`Encontradas ${completedTasks.length} tareas completadas para eliminar`);
+    
+    for (const task of completedTasks) {
+      console.log(`Eliminando tarea: ${task.id}`);
+      await deleteTask(task.id);
+    }
+    
     console.log("Tareas completadas eliminadas correctamente");
   } catch (error) {
     console.error("Error al eliminar tareas completadas:", error);
