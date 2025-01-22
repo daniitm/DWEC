@@ -26,7 +26,6 @@ const loginPassword = ref('')
 // Estado para mostrar el formulario de registro
 const showRegisterForm = ref(false)
 
-// ... (mantén las funciones loginGoogle, loginGithub, registrarUsuario, iniciarSesionEmail, logout y createOrUpdateUser como estaban)
 async function loginGoogle() {
   try {
     const result = await signInWithPopup(auth, googleAuthProvider);

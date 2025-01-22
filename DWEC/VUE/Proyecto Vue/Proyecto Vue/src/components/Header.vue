@@ -11,7 +11,7 @@ function handleClearCompleted(event) {
   event.stopPropagation(); // Detiene la propagación del evento
   console.log("Emitiendo evento clear-completed");
   emit('clear-completed');
-  return false; // Asegura que no haya navegación
+  return false;
 }
 </script>
 

@@ -51,7 +51,7 @@ $(document).ready(function () {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         tasks.push({
             text,
-            priority: 1, // Normal
+            priority: 1, 
             completed: false,
             createdAt: new Date(),
         });
@@ -128,6 +128,5 @@ $(document).ready(function () {
         clearCompletedTasks();
     });
 
-    // Inicialización
     loadTasks();
 });
