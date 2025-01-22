@@ -1,0 +1,104 @@
+/* Estilos generales */
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+#app {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+input#taskInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.info a {
+    color: orange;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    background-color: #1e1e1e;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    color: #777;
+}
+
+.task-priority {
+    margin-right: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.low-priority {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.normal-priority {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.high-priority {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+}
+
+.task-delete {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+}
