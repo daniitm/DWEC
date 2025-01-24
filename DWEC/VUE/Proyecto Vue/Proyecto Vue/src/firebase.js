@@ -3,9 +3,9 @@ import { getFirestore, collection } from 'firebase/firestore'
 import { conexion } from './firebaseAPIKey'
 // ... other firebase imports
 
-const firebaseConfig = initializeApp(conexion);
+// const firebaseConfig = initializeApp(conexion);
 
-export const firebaseApp = initializeApp(firebaseConfig)
+export const firebaseApp = initializeApp(conexion)
 
 // used for the firestore refs
 const db = getFirestore(firebaseApp)
