@@ -63,7 +63,6 @@ function handleUpdateTask(taskId, updatedData) {
   emit("update-task", taskId, updatedData);
 }
 
-/*
 const tareasOrdenadas = computed(() => {
   if (!tasks.value) return [];
   const priorityOrder = { "🔴 High": 1, "🟡 Normal": 2, "🟢 Low": 3 };
@@ -73,14 +72,7 @@ const tareasOrdenadas = computed(() => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
 });
-*/
 
-const tareasOrdenadas = computed(() => {
-  if (!tasks.value) return [];
-  return [...tasks.value].sort((a, b) => {
-    return a.text.localeCompare(b.text);
-  });
-});
 </script>
 
 <template>
