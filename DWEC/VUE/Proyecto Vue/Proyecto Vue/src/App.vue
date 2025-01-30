@@ -71,7 +71,7 @@ async function addTask(taskData) {
   const newTask = {
     userId: user.value.uid,
     text: taskData.text,
-    priority: "🟡 Normal",
+    priority: "a",
     completed: false,
     createdAt: new Date().toISOString(),
   };
