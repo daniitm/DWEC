@@ -40,13 +40,14 @@ function Game() {
     if (showVictoryMessage && auth.currentUser) {
       const updateRanking = async () => {
         try {
-          const userEmail = auth.currentUser.email;
-          const userDocRef = doc(db, 'ranking', userEmail);
-          const userDoc = await getDoc(userDocRef);
+          const userId = auth.currentUser.uid;
+          const rankingDocRef = doc(db, 'ranking', userId);
+          const rankingDoc = await getDoc(rankingDocRef);
           
-          if (!userDoc.exists() || userDoc.data().tiempo > time) {
-            await setDoc(userDocRef, {
-              email: userEmail,
+          if (!rankingDoc.exists() || rankingDoc.data().tiempo === Infinity || rankingDoc.data().tiempo > time) {
+            await setDoc(rankingDocRef, {
+              userId: userId,
+              username: auth.currentUser.displayName || rankingDoc.data()?.username || 'Usuario Anónimo',
               tiempo: time
             }, { merge: true });
           }
@@ -144,9 +145,9 @@ function Game() {
       const q = query(rankingRef, orderBy('tiempo'), limit(3));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const players = querySnapshot.docs.map(doc => ({
-          email: doc.data().email,
+          username: doc.data().username,
           tiempo: formatTime(doc.data().tiempo)
-        }));
+        })).filter(player => player.tiempo !== formatTime(Infinity));
         setTopPlayers(players);
       });
       return unsubscribe;
@@ -164,6 +165,7 @@ function Game() {
           ¡Has ganado! Tiempo total: {formatTime(time)}
         </div>
       )}
+      <br></br>
       <div className="cards-container">
         {cards.map(card => (
           <div
@@ -178,20 +180,20 @@ function Game() {
       <button onClick={initializeGame}>Reiniciar Juego</button>
 
       <div className="ranking-table">
-        <h2>Top 3 Jugadores</h2>
+        <h2>Ranking de los mejores 3 jugadores</h2>
         <table>
           <thead>
             <tr>
               <th>Posición</th>
-              <th>Email</th>
-              <th>Mejor Tiempo</th>
+              <th>Nombre de Usuario</th>
+              <th>Tiempo</th>
             </tr>
           </thead>
           <tbody>
             {topPlayers.map((player, index) => (
-              <tr key={player.email}>
+              <tr key={player.username}>
                 <td>{index + 1}</td>
-                <td>{player.email}</td>
+                <td>{player.username}</td>
                 <td>{player.tiempo}</td>
               </tr>
             ))}

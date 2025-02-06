@@ -37,51 +37,44 @@ function Details() {
   }
 
   return (
-    <div className="container mt-5">
-      <Link to="/" className="btn btn-primary mb-3">Volver a la lista</Link>
+    <div className="pokemon-details">
+      <Link to="/pokemons" className="back-button">Volver a la lista</Link>
       {pokemon && (
-        <div className="card">
-          <div className="card-body">
-            <div className="row">
-              <div className="col-md-6 text-center">
-                <img 
-                  src={pokemon.sprites.other["official-artwork"].front_default} 
-                  alt={pokemon.name} 
-                  className="img-fluid"
-                  style={{ maxWidth: '300px' }}
-                />
-              </div>
-              <div className="col-md-6">
-                <h2 className="card-title text-capitalize">{pokemon.name}</h2>
-                <p><strong>Número:</strong> #{pokemon.id}</p>
-                <p><strong>Altura:</strong> {pokemon.height / 10} m</p>
-                <p><strong>Peso:</strong> {pokemon.weight / 10} kg</p>
-                <p><strong>Tipos:</strong> {pokemon.types.map(type => type.type.name).join(', ')}</p>
-                <p><strong>Habilidades:</strong> {pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
-              </div>
+        <>
+          <img 
+            src={pokemon.sprites.other["official-artwork"].front_default} 
+            alt={pokemon.name} 
+          />
+          <h2 className="text-capitalize">{pokemon.name}</h2>
+          <div className="info">
+            <p><strong>Número:</strong> #{pokemon.id}</p>
+            <p><strong>Altura:</strong> {pokemon.height / 10} m</p>
+            <p><strong>Peso:</strong> {pokemon.weight / 10} kg</p>
+            <div className="types">
+              {pokemon.types.map(type => (
+                <span key={type.type.name} className="type">{type.type.name}</span>
+              ))}
             </div>
-            <div className="row mt-4">
-              <div className="col-12">
-                <h3>Estadísticas</h3>
-                {pokemon.stats.map(stat => (
-                  <div key={stat.stat.name} className="mb-2">
-                    <strong>{stat.stat.name}:</strong> {stat.base_stat}
-                    <div className="progress">
-                      <div 
-                        className="progress-bar" 
-                        role="progressbar" 
-                        style={{width: `${(stat.base_stat / 255) * 100}%`}}
-                        aria-valuenow={stat.base_stat} 
-                        aria-valuemin="0" 
-                        aria-valuemax="255"
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <p><strong>Habilidades:</strong> {pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
           </div>
-        </div>
+          <div className="stats">
+            <h3>Estadísticas:</h3>
+            {pokemon.stats.map(stat => (
+              <div key={stat.stat.name} className="stat-item">
+                <strong>{stat.stat.name}:</strong> {stat.base_stat}
+                <div className="progress">
+                  <div 
+                    className="progress-bar" 
+                    style={{width: `${(stat.base_stat / 255) * 100}%`}}
+                    aria-valuenow={stat.base_stat} 
+                    aria-valuemin="0" 
+                    aria-valuemax="255"
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

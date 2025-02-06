@@ -46,7 +46,6 @@ function Pokemons() {
       const response = await fetch(`${API_URL}${searchTerm.toLowerCase()}`);
       if (!response.ok) throw new Error("Pokémon no encontrado");
       const data = await response.json();
-      setPokemonList([]);
       setSearchedPokemon(data);
       setSearchError(null);
     } catch (error) {
@@ -59,78 +58,84 @@ function Pokemons() {
 
   const resetSearch = () => {
     setSearchTerm("");
-    setPokemonList([]);
     setSearchedPokemon(null);
     setSearchError(null);
-    setOffset(0);
-    loadPokemonData();
+    if (pokemonList.length === 0) {
+      setOffset(0);
+      loadPokemonData();
+    }
   };
 
   const renderPokemonCard = (pokemon) => (
-    <div key={pokemon.name} className="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center">
-      <div className="card shadow-sm border-2" style={{ width: "100%" }}>
-        <div className="card-img-top text-center p-3">
-          <Link to={`/pokemons/${pokemon.id}`}>   
-            <img src={pokemon.sprites.other["official-artwork"].front_default} alt={pokemon.name} className="img-fluid" style={{ width: "150px", height: "150px" }} />
-          </Link>
-        </div>
-        <div className="card-body text-center">
-          <span className="badge bg-custom text-uppercase">{pokemon.types[0].type.name}</span>
-          <h5 className="card-title mt-2 text-capitalize">{pokemon.name}</h5>
-          <Link to={`/pokemons/${pokemon.id}`} className="btn btn-outline-primary custom-primary-btn">Ver Detalles</Link>
-        </div>
+    <div key={pokemon.id} className="pokemon-card">
+      <Link to={`/pokemons/${pokemon.id}`}>   
+        <img src={pokemon.sprites.other["official-artwork"].front_default} alt={pokemon.name} />
+      </Link>
+      <h3 className="text-capitalize">{pokemon.name}</h3>
+      <p>#{pokemon.id.toString().padStart(3, '0')}</p>
+      <div className="types">
+        {pokemon.types.map(typeInfo => (
+          <span key={typeInfo.type.name} className="type">{typeInfo.type.name}</span>
+        ))}
       </div>
+      <Link to={`/pokemons/${pokemon.id}`} className="btn">Ver Detalles</Link>
     </div>
   );
 
   return (
     <>
-      <div className="page-header py-4 bg-light text-center">
+      <div className="page-header">
         <div className="container">
-          <h1 className="display-5">Explorador Pokémon</h1>
-          <p className="lead">Descubre tu Pokémon favorito y sus detalles.</p>
+          <h1>Explorador todos los Pokemons</h1>
+          <p>Descubre tu Pokémon favorito y todos sus detalles, características y estadísticas.</p>
         </div>
-        <input
-          className="px-2 py-1 border-custom border-input"
-          type="text"
-          placeholder="Busca un Pokémon..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && searchPokemon()}
-        />
-        <span className="p-2 mx-1 rounded custom-search" onClick={searchPokemon}>Buscar</span>
-        <span className="p-2 mx-1 rounded custom-search" onClick={resetSearch}>X</span>
+        <div className="search-container">
+          <input
+            className="search-input"
+            type="text"
+            placeholder="Busca un Pokémon..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && searchPokemon()}
+          />
+          <button className="search-button" onClick={searchPokemon}>Buscar</button>
+          <button className="reset-button" onClick={resetSearch}>X</button>
+        </div>
       </div>
 
-      <div className="section py-5">
-        <div className="container">
-          {searchedPokemon && (
-            <div className="row mb-4">
-              <h3 className="text-center">Resultado de la búsqueda:</h3>
-              {renderPokemonCard(searchedPokemon)}
-            </div>
-          )}
-
-          {searchError && <p className="text-center text-danger">{searchError}</p>}
-
-          <div className="row">
-            {pokemonList.map(renderPokemonCard)}
+      <div className="pokemon-container">
+        {searchedPokemon && (
+          <div className="search-result">
+            <h3>Resultado de la búsqueda:</h3>
+            {renderPokemonCard(searchedPokemon)}
           </div>
+        )}
 
-          {loading && (
-            <div className="d-flex justify-content-center align-items-center my-5">
-              <div className="spinner-border custom-yellow-spinner" role="status">
-                <span className="visually-hidden">Cargando...</span>
+        {searchError && (
+          <div className="error-message">
+            <p>{searchError}</p>
+          </div>
+        )}
+
+        {!searchedPokemon && !searchError && (
+          <>
+            <div className="pokemon-list">
+              {pokemonList.map(renderPokemonCard)}
+            </div>
+
+            {loading && (
+              <div className="spinner-container">
+                <div className="spinner-border custom-yellow-spinner" role="status">
+                  <span className="visually-hidden">Cargando...</span>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div className="row">
-            <div className="col-12 text-center">
-              <button onClick={loadPokemonData} className="btn custom-load-btn">Cargar más</button>
+            <div className="load-more-container">
+              <button onClick={loadPokemonData} className="custom-load-btn">Cargar más</button>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </>
   );
