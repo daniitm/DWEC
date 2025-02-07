@@ -14,7 +14,7 @@ export function PrivRoutes() {
                 console.log("SALTA CAMBIO EN LOGIN CON USER = " + user.displayName);
             } else {
                 console.log("Cierra sesión");
-                setUsuario(<Navigate to="/" />);
+                setUsuario(<Navigate to="/login" />);
             }
         })
     }, []);

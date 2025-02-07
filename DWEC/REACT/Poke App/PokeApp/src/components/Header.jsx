@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
   return (
     <header>
-      <h1>Mi App de Pokémon</h1>
+      <h1>PokeApp</h1>
     </header>
   );
 }

@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      <p>&copy; 2025 Mi App de Pokémon. Todos los derechos reservados.</p>
+      <p>Desarrollado por Daniel Triviño Marín. &copy; 2025 Mi PokeApp. Todos los derechos reservados.</p>
     </footer>
   );
 }

@@ -39,6 +39,7 @@ function Details() {
   return (
     <div className="pokemon-details">
       <Link to="/pokemons" className="back-button">Volver a la lista</Link>
+      <br></br>
       {pokemon && (
         <>
           <img 
